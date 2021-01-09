@@ -156,7 +156,8 @@ def main():
                                            loss=loss, 
                                            n_iter=500, 
                                            device=device)
-    print(f"{}epochのモデルが最もvalid lossが下がった", select_epoch(valid_losses))
+    best_epoch = select_epoch(valid_losses)
+    print(f'{best_epoch}epochのモデルが最もvalid lossが下がった。')
     
 
 if __name__ == '__main__':
