@@ -29,7 +29,7 @@ class Model(nn.Module):
 
         self.total_fc1 = nn.Linear(1536, 768)
         self.total_fc2 = nn.Linear(768, 384)
-        self.total_fc3 = nn.Linear(384, 2)
+        self.total_fc3 = nn.Linear(384, 1)
 
 
 
