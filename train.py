@@ -48,7 +48,7 @@ def load_data():
     train_loader = DataLoader(train_dataset, batch_size=128, shuffle=True)
     valid_loader = DataLoader(valid_dataset, batch_size=128, shuffle=True)
     with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/test2017/test_dataset.pkl', 'wb') as f:
-        pickle.dump(test_dataset, f)
+        pickle.dump(test_dataset, f, protocol=4)
     # return valid_dataset, valid_loader
     return train_dataset, valid_dataset, train_loader, valid_loader
 
