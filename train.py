@@ -104,14 +104,15 @@ def train_net(model, train_loader, valid_loader, loss, n_iter, device):
         # 検証用データでのloss値
         pred_valid =  eval_net(model, valid_loader, loss, device)
         valid_losses.append(pred_valid)
-        print('epoch:' +  str(epoch+1), 'train loss:'+ str(train_losses[-1]), 'valid loss:' + str(valid_losses[-1]), flush=True)
+        print('epoch:' +  str(epoch+1), 'train loss:'+ str(train_losses[-1]*1000), 'valid loss:' + str(valid_losses[-1]*1000), flush=True)
+
         # 学習モデル保存
         if (epoch+1)%1==0:
             # 学習させたモデルの保存パス
             model_path =  f'model/model_epoch{epoch+1}.pth'
             # モデル保存
             torch.save(model.to('cpu').state_dict(), model_path)
-            loss保存
+            # loss保存
             with open('model/train_losses.pkl', 'wb') as f:
                 pickle.dump(train_losses, f) 
             with open('model/train_losses.pkl', 'wb') as f:
