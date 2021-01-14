@@ -40,16 +40,11 @@ def load_data():
         val_labeldata = pickle.load(f) 
 
     train_dataset = MyDataset(train_imagedata, train_keydata, train_ansdata, train_labeldata)
-    val_dataset = MyDataset(val_imagedata, val_keydata, val_ansdata, val_labeldata)
-    val_samples = len(val_dataset)
-    test_size = int(val_samples * 0.2)
-    val_size = val_samples - test_size
-    valid_dataset, test_dataset = torch.utils.data.random_split(val_dataset, [val_size, test_size])
+    valid_dataset = MyDataset(val_imagedata, val_keydata, val_ansdata, val_labeldata)
+
     train_loader = DataLoader(train_dataset, batch_size=128, shuffle=True)
     valid_loader = DataLoader(valid_dataset, batch_size=128, shuffle=True)
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/test2017/test_dataset.pkl', 'wb') as f:
-        pickle.dump(test_dataset, f, protocol=4)
-    # return valid_dataset, valid_loader
+
     return train_dataset, valid_dataset, train_loader, valid_loader
 
 # モデル評価
@@ -57,6 +52,7 @@ def eval_net(model, data_loader, loss, device):
     model.eval()
     model = model.to(device)
     outputs = []
+    accs = []
     for i, (image, key, ans, label) in enumerate(data_loader):
         with torch.no_grad():
             # GPU setting
@@ -69,19 +65,29 @@ def eval_net(model, data_loader, loss, device):
         output = loss(torch.squeeze(pred), label)
         outputs.append(output.item())
 
-    return sum(outputs) / i 
+        pred = torch.squeeze(pred)
+        pred = pred.to('cpu').detach().numpy().copy()
+        label = label.to('cpu').detach().numpy().copy()
+        pred = np.where(pred > 0, 1, 0)
+        acc = (pred == label).sum() / len(label)
+        accs.append(acc)
+
+    return sum(outputs) / i , sum(accs)/i
     
 
 # モデルの学習
 def train_net(model, train_loader, valid_loader, loss, n_iter, device):
     train_losses = []
     valid_losses = []
+    train_accs = []
+    val_accs = []
     optimizer = optim.Adam(model.parameters())
     for epoch in range(n_iter):
         running_loss = 0.0
         model = model.to(device)
         # ネットワーク訓練モード
         model.train()
+        accs = []
         for i, (image, key, ans, label) in enumerate(tqdm(train_loader, total=len(train_loader))):        
             # GPU setting
             image = image.to(device)
@@ -91,8 +97,15 @@ def train_net(model, train_loader, valid_loader, loss, n_iter, device):
 
             # model
             pred = model(image, key, ans)
-
             output = loss(torch.squeeze(pred), label)
+
+            pred = torch.squeeze(pred)
+            pred = pred.to('cpu').detach().numpy().copy()
+            label = label.to('cpu').detach().numpy().copy()
+            pred = np.where(pred > 0, 1, 0)
+            acc = (pred == label).sum() / len(label)
+            accs.append(acc)
+            
    
             optimizer.zero_grad()
             output.backward()
@@ -102,20 +115,22 @@ def train_net(model, train_loader, valid_loader, loss, n_iter, device):
         # 訓練用データでのloss値
         train_losses.append(running_loss / i)
         # 検証用データでのloss値
-        pred_valid =  eval_net(model, valid_loader, loss, device)
+        pred_valid, val_acc =  eval_net(model, valid_loader, loss, device)
+        train_accs.append(sum(accs)/i)
+        val_accs.append(val_acc)
         valid_losses.append(pred_valid)
-        print('epoch:' +  str(epoch+1), 'train loss:'+ str(train_losses[-1]*1000), 'valid loss:' + str(valid_losses[-1]*1000), flush=True)
+        print('epoch:' +  str(epoch+1), 'train loss:'+ str(train_losses[-1]), 'valid loss:' + str(valid_losses[-1]), 'train acc:' + str(train_accs[-1]),  'val acc:' + str(val_accs[-1]), flush=True)
 
         # 学習モデル保存
         if (epoch+1)%1==0:
             # 学習させたモデルの保存パス
-            model_path =  f'model/model_epoch{epoch+1}.pth'
+            model_path =  f'model/model0112_epoch{epoch+1}.pth'
             # モデル保存
             torch.save(model.to('cpu').state_dict(), model_path)
             # loss保存
             with open('model/train_losses.pkl', 'wb') as f:
                 pickle.dump(train_losses, f) 
-            with open('model/train_losses.pkl', 'wb') as f:
+            with open('model/valid_losses.pkl', 'wb') as f:
                 pickle.dump(valid_losses, f) 
             # グラフ描画
             my_plot(train_losses, valid_losses)
@@ -135,7 +150,7 @@ def my_plot(train_losses, valid_losses):
     #グラフの凡例
     plt.legend()
     # グラフ画像保存
-    fig.savefig("loss.png")
+    fig.savefig("losstest.png")
 
 def select_epoch(valid_losses):
     min_loss = min(valid_losses)
@@ -155,7 +170,7 @@ def main():
                                            train_loader=train_loader, 
                                            valid_loader=valid_loader,  
                                            loss=loss, 
-                                           n_iter=500, 
+                                           n_iter=200, 
                                            device=device)
     best_epoch = select_epoch(valid_losses)
     print(f'{best_epoch}epochのモデルが最もvalid lossが下がった。')
