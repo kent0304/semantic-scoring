@@ -1,0 +1,66 @@
+# - IMAGE: './src/fallen-tree-blocking-road.jpg'
+#   KEY: 'fall block'
+#   ANSWER: 'A fallen tree is bloking the road'
+# - IMAGE: './src/fallen-tree-blocking-road.jpg'
+#   KEY: 'fall block'
+#   ANSWER: 'A fallen forest is bloking the ground'
+# - IMAGE: './src/fallen-tree-blocking-road.jpg'
+#   KEY: 'fall block'
+#   ANSWER: 'A fallen vehicle is bloking the sea'
+# - IMAGE: './src/fallen-tree-blocking-road.jpg'
+#   KEY: 'fall block'
+#   ANSWER: 'sea'
+
+# - IMAGE: './src/000000436138.jpg'
+#   KEY: 'has'
+#   ANSWER: 'The front of a house that has a balcony on the second floor'
+# - IMAGE: './src/000000436138.jpg'
+#   KEY: 'has'
+#   ANSWER: 'The copier of a dome that has a rooom on the second consternation'
+# - IMAGE: './src/000000436130.jpg'
+#   KEY: 'cluttered'
+#   ANSWER: 'A small kitchen cluttered with a variety of kitchen items.'
+# - IMAGE: './src/000000436130.jpg'
+#   KEY: 'cluttered'
+#   ANSWER: 'A small bairs cluttered with a boogy of kitchen circular.. .'
+
+# - IMAGE: './src/motorcycle.jpg'
+#   KEY: 'is'
+#   ANSWER: 'There is a motorcycle parked in front of the shop.'
+# - IMAGE: './src/motorcycle.jpg'
+#   KEY: 'is'
+#   ANSWER: 'There is a tree parked in front of the school.'
+# - IMAGE: './src/motorcycle.jpg'
+#   KEY: 'is'
+#   ANSWER: 'There is a panda parked in water of the airport.'
+# - IMAGE: './src/motorcycle.jpg'
+#   KEY: 'is'
+#   ANSWER: 'There is a bread parked in front of the horse.'
+
+# 正しい文
+- IMAGE: './src/deer.jpg'
+  KEY: 'is riding'
+  ANSWER: 'A small bird is riding on the back of a deer.'
+# スペルミス
+- IMAGE: './src/deer.jpg'
+  KEY: 'is riding'
+  ANSWER: 'A small bard is riding on the back of a dear.'
+# 用語ミス
+- IMAGE: './src/deer.jpg'
+  KEY: 'is riding'
+  ANSWER: 'A small fly is riding on the back of a bambi .'
+# 物理的に可能な誤り文
+- IMAGE: './src/deer.jpg'
+  KEY: 'is riding'
+  ANSWER: 'A small ant is riding on the back of a horse.'
+# 写真と全く異なる文
+- IMAGE: './src/deer.jpg'
+  KEY: 'is riding'
+  ANSWER: 'A small fish is riding on the back of a apple.'
+# 滅茶苦茶な文
+- IMAGE: './src/deer.jpg'
+  KEY: 'is riding'
+  ANSWER: 'A small baseball is riding on the banana of a computer.'
+
+
+
