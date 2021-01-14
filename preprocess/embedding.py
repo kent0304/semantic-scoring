@@ -1,3 +1,4 @@
+# 辞書で管理しているimg2infoをもとにinfoをベクトルに変換
 import os
 import json 
 import random 

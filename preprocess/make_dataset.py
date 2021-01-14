@@ -1,3 +1,4 @@
+# ベクトルに変換したinfovecを用いてpytorchから呼び出す形に揃えてpickle保存
 import pickle 
 import numpy as np
 import torch
