@@ -1,4 +1,4 @@
-
+# 疑似誤り文（ノイズ）を生成し、img2infoの辞書で保管。
 import json 
 import random
 import pickle
@@ -10,20 +10,6 @@ nltk.download('averaged_perceptron_tagger')
 
 from tqdm import tqdm
 
-# ------------------------------
-
-# caption = "A person is holding up a hair dryer in the bathroom."
-# morph = nltk.word_tokenize(caption)
-# print("morph:", morph)
-
-# pos = nltk.pos_tag(morph)
-# print("pos:", pos)
-
-# for token in pos:
-#     if token[1] == 'NN' or token[1] == 'NNS':
-#         print(token[0])
-
-# ------------------------------
 
 def load_corpus(json_obj):
     # 全ての文を管理するコーパス
@@ -119,6 +105,10 @@ def main():
     val_corpus, val_nn = load_corpus(val2017)
     # 文がリストで管理されたコーパス
     corpus = train_corpus + val_corpus
+    c = '\n'.join(corpus)
+    # コーパスファイル書き込み
+    # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/annotations/corpus.txt', 'w') as f:
+    #     f.write(c)
     # 名詞のリストはnnで管理
     nn = train_nn + val_nn
     print("nnのリストの要素数は", len(nn))
@@ -128,10 +118,10 @@ def main():
     # 画像のidをkey {key, captions, noise_captions}をvalueにした辞書
     train_img2info = build_img2info(train2017, corpus, nn)
     val_img2info = build_img2info(val2017, corpus, nn)
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/train2017_img2info.pkl', 'wb') as f:
-        pickle.dump(train_img2info, f) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/val2017_img2info.pkl', 'wb') as f:
-        pickle.dump(val_img2info, f) 
+    # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/train2017_img2info.pkl', 'wb') as f:
+    #     pickle.dump(train_img2info, f) 
+    # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/val2017_img2info.pkl', 'wb') as f:
+    #     pickle.dump(val_img2info, f) 
 
 
 
