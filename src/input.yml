@@ -1,66 +1,74 @@
-# - IMAGE: './src/fallen-tree-blocking-road.jpg'
-#   KEY: 'fall block'
-#   ANSWER: 'A fallen tree is bloking the road'
-# - IMAGE: './src/fallen-tree-blocking-road.jpg'
-#   KEY: 'fall block'
-#   ANSWER: 'A fallen forest is bloking the ground'
-# - IMAGE: './src/fallen-tree-blocking-road.jpg'
-#   KEY: 'fall block'
-#   ANSWER: 'A fallen vehicle is bloking the sea'
-# - IMAGE: './src/fallen-tree-blocking-road.jpg'
-#   KEY: 'fall block'
-#   ANSWER: 'sea'
+# 正しい文 1
+- IMAGE: './src/000000072281.jpg'
+  KEY: 'jumps'
+  ANSWER: 'The young man in the cap jumps up on a skateboard.'
+# 疑似誤り文 0
+- IMAGE: './src/000000072281.jpg'
+  KEY: 'jumps'
+  ANSWER: 'The young browsing in the groceries jumps up on a hoods .'
+# 単語入れ替え（正しい）1
+- IMAGE: './src/000000072281.jpg'
+  KEY: 'jumps'
+  ANSWER: 'The young guy with a cap jumps up.'
+# 単語入れ替え（誤り）1
+- IMAGE: './src/000000072281.jpg'
+  KEY: 'jumps'
+  ANSWER: 'The old man in the cap jumps up on a skate.'
 
-# - IMAGE: './src/000000436138.jpg'
-#   KEY: 'has'
-#   ANSWER: 'The front of a house that has a balcony on the second floor'
-# - IMAGE: './src/000000436138.jpg'
-#   KEY: 'has'
-#   ANSWER: 'The copier of a dome that has a rooom on the second consternation'
-# - IMAGE: './src/000000436130.jpg'
-#   KEY: 'cluttered'
-#   ANSWER: 'A small kitchen cluttered with a variety of kitchen items.'
-# - IMAGE: './src/000000436130.jpg'
-#   KEY: 'cluttered'
-#   ANSWER: 'A small bairs cluttered with a boogy of kitchen circular.. .'
 
-# - IMAGE: './src/motorcycle.jpg'
-#   KEY: 'is'
-#   ANSWER: 'There is a motorcycle parked in front of the shop.'
-# - IMAGE: './src/motorcycle.jpg'
-#   KEY: 'is'
-#   ANSWER: 'There is a tree parked in front of the school.'
-# - IMAGE: './src/motorcycle.jpg'
-#   KEY: 'is'
-#   ANSWER: 'There is a panda parked in water of the airport.'
-# - IMAGE: './src/motorcycle.jpg'
-#   KEY: 'is'
-#   ANSWER: 'There is a bread parked in front of the horse.'
 
-# 正しい文
-- IMAGE: './src/deer.jpg'
-  KEY: 'is riding'
-  ANSWER: 'A small bird is riding on the back of a deer.'
-# スペルミス
-- IMAGE: './src/deer.jpg'
-  KEY: 'is riding'
-  ANSWER: 'A small bard is riding on the back of a dear.'
-# 用語ミス
-- IMAGE: './src/deer.jpg'
-  KEY: 'is riding'
-  ANSWER: 'A small fly is riding on the back of a bambi .'
-# 物理的に可能な誤り文
-- IMAGE: './src/deer.jpg'
-  KEY: 'is riding'
-  ANSWER: 'A small ant is riding on the back of a horse.'
-# 写真と全く異なる文
-- IMAGE: './src/deer.jpg'
-  KEY: 'is riding'
-  ANSWER: 'A small fish is riding on the back of a apple.'
-# 滅茶苦茶な文
-- IMAGE: './src/deer.jpg'
-  KEY: 'is riding'
-  ANSWER: 'A small baseball is riding on the banana of a computer.'
+# 正しい文 1
+- IMAGE: './src/000000147725.jpg'
+  KEY: 'driving'
+  ANSWER: 'A metro bus driving down a fairly busy city street.'
+# 疑似誤り文 0
+- IMAGE: './src/000000147725.jpg'
+  KEY: 'driving'
+  ANSWER: 'A berets Slices driving down a fairly busy keybooard balconies .'
+# 単語入れ替え（正しい）1
+- IMAGE: './src/000000147725.jpg'
+  KEY: 'driving'
+  ANSWER: 'A city bus driving down a little crowded street.'
+# 単語入れ替え（誤り）1
+- IMAGE: './src/000000147725.jpg'
+  KEY: 'driving'
+  ANSWER: 'A metro train driving down a fairly busy city street.'
+
+
+# 正しい文 1
+- IMAGE: './src/000000215114.jpg'
+  KEY: 'attempting fit'
+  ANSWER: 'Man in blue shirt attempting to fit into a refrigerator.'
+# 疑似誤り文 0
+- IMAGE: './src/000000215114.jpg'
+  KEY: 'attempting fit'
+  ANSWER: 'wildflower in blue vender attempting to fit into a barber .'
+# 単語入れ替え（正しい）1
+- IMAGE: './src/000000215114.jpg'
+  KEY: 'attempting fit'
+  ANSWER: 'Guy with blue shirt attempting to fit into a fridge.'
+# 単語入れ替え（誤り）1
+- IMAGE: './src/000000215114.jpg'
+  KEY: 'attempting fit'
+  ANSWER: 'Man in yellow shirt attempting to enter into a microwave.'
+
+
+# 正しい文 1
+- IMAGE: './src/000000581781.jpg'
+  KEY: 'surround'
+  ANSWER: 'A group of bananas surround a small display of kiwi.'
+# 疑似誤り文 0
+- IMAGE: './src/000000581781.jpg'
+  KEY: 'surround'
+  ANSWER: 'A savannah of mm surround a small ramshackle of wiggles .'
+# 単語入れ替え（正しい）1
+- IMAGE: './src/000000581781.jpg'
+  KEY: 'surround'
+  ANSWER: 'A bunch of bananas surround a little kiwi.'
+# 単語入れ替え（誤り）1
+- IMAGE: './src/000000581781.jpg'
+  KEY: 'surround'
+  ANSWER: 'Much bananas surround a small exhibition of kiwi.'
 
 
 
