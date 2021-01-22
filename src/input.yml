@@ -1,74 +1,251 @@
-# 正しい文 1
-- IMAGE: './src/000000072281.jpg'
-  KEY: 'jumps'
-  ANSWER: 'The young man in the cap jumps up on a skateboard.'
-# 疑似誤り文 0
-- IMAGE: './src/000000072281.jpg'
-  KEY: 'jumps'
-  ANSWER: 'The young browsing in the groceries jumps up on a hoods .'
-# 単語入れ替え（正しい）1
-- IMAGE: './src/000000072281.jpg'
-  KEY: 'jumps'
-  ANSWER: 'The young guy with a cap jumps up.'
-# 単語入れ替え（誤り）1
-- IMAGE: './src/000000072281.jpg'
-  KEY: 'jumps'
-  ANSWER: 'The old man in the cap jumps up on a skate.'
+### GroupA
+# 6894 --------------------------------------------------------------------------------------
+- IMAGE: './src/000000006894.jpg' ###
+  KEY: 'getting' 
+  ANSWER: 'A man getting a kiss on the neck from an elephant's trunk.'
 
+- IMAGE: './src/000000006894.jpg'
+  KEY: 'kiss s being'
+  ANSWER: 'A man being kiss by a baby elephant with it's trunk.'
 
+- IMAGE: './src/000000006894.jpg'
+  KEY: 'throws'
+  ANSWER: 'A man throws his head back as an elephant touches his face with its trunk.'
 
-# 正しい文 1
-- IMAGE: './src/000000147725.jpg'
+- IMAGE: './src/000000006894.jpg'
+  KEY: 'cuddle using'
+  ANSWER: 'An elephant using his truck to cuddle with a man.'
+
+- IMAGE: './src/000000006894.jpg'
+  KEY: 'is playing'
+  ANSWER: 'A man is playing with an elephant in a field.'
+
+# 7816 --------------------------------------------------------------------------------------
+- IMAGE: './src/000000007816.jpg' ###
+  KEY: 'riding dressed'
+  ANSWER: 'a rider dressed in white riding a matching white motorcycle '
+
+- IMAGE: './src/000000007816.jpg'
   KEY: 'driving'
-  ANSWER: 'A metro bus driving down a fairly busy city street.'
-# 疑似誤り文 0
-- IMAGE: './src/000000147725.jpg'
+  ANSWER: 'A person on a motorcycles driving past a group of people behind a fence.'
+
+- IMAGE: './src/000000007816.jpg'
+  KEY: 'watching'
+  ANSWER: 'A guy on a motorcycle with some people watching.'
+
+
+
+### GroupB ----------------------------------------------------------------------------------
+# 1268
+- IMAGE: './src/000000001268.jpg'
+  KEY: 'taking'
+  ANSWER: 'A beautiful woman taking a picture with her smart phone.'
+
+- IMAGE: './src/000000001268.jpg'
+  KEY: 'underneath'
+  ANSWER: 'People underneath an arched bridge near the water.'
+
+- IMAGE: './src/000000001268.jpg'
+  KEY: 'taking is fishing'
+  ANSWER: 'A girl is taking a picture of people fishing.'
+
+- IMAGE: './src/000000001268.jpg'
+  KEY: 'taking is'
+  ANSWER: 'The woman is taking a photo of the white goose next to the river.'
+
+- IMAGE: './src/000000001268.jpg' ###
+  KEY: 'taking sitting'
+  ANSWER: 'A waterway under a bridge with people sitting down and a woman taking a photo.'
+
+# 1584 --------------------------------------------------------------------------------------
+- IMAGE: './src/000000001584.jpg'
+  KEY: 'is driving'
+  ANSWER: 'The red, double decker bus is driving past other buses. '
+
+- IMAGE: './src/000000001584.jpg' ###
   KEY: 'driving'
-  ANSWER: 'A berets Slices driving down a fairly busy keybooard balconies .'
-# 単語入れ替え（正しい）1
-- IMAGE: './src/000000147725.jpg'
-  KEY: 'driving'
-  ANSWER: 'A city bus driving down a little crowded street.'
-# 単語入れ替え（誤り）1
-- IMAGE: './src/000000147725.jpg'
-  KEY: 'driving'
-  ANSWER: 'A metro train driving down a fairly busy city street.'
+  ANSWER: 'A red double decker bus driving down a city street.'
+
+- IMAGE: './src/000000001584.jpg'
+  KEY: 'is driving'
+  ANSWER: 'A red bus is driving on the road.'
+
+- IMAGE: './src/000000001584.jpg'
+  KEY: 'is'
+  ANSWER: 'a red double decker bus that is in the middle of the road'
 
 
-# 正しい文 1
-- IMAGE: './src/000000215114.jpg'
-  KEY: 'attempting fit'
-  ANSWER: 'Man in blue shirt attempting to fit into a refrigerator.'
-# 疑似誤り文 0
-- IMAGE: './src/000000215114.jpg'
-  KEY: 'attempting fit'
-  ANSWER: 'wildflower in blue vender attempting to fit into a barber .'
-# 単語入れ替え（正しい）1
-- IMAGE: './src/000000215114.jpg'
-  KEY: 'attempting fit'
-  ANSWER: 'Guy with blue shirt attempting to fit into a fridge.'
-# 単語入れ替え（誤り）1
-- IMAGE: './src/000000215114.jpg'
-  KEY: 'attempting fit'
-  ANSWER: 'Man in yellow shirt attempting to enter into a microwave.'
 
 
-# 正しい文 1
-- IMAGE: './src/000000581781.jpg'
-  KEY: 'surround'
-  ANSWER: 'A group of bananas surround a small display of kiwi.'
-# 疑似誤り文 0
-- IMAGE: './src/000000581781.jpg'
-  KEY: 'surround'
-  ANSWER: 'A savannah of mm surround a small ramshackle of wiggles .'
-# 単語入れ替え（正しい）1
-- IMAGE: './src/000000581781.jpg'
-  KEY: 'surround'
-  ANSWER: 'A bunch of bananas surround a little kiwi.'
-# 単語入れ替え（誤り）1
-- IMAGE: './src/000000581781.jpg'
-  KEY: 'surround'
-  ANSWER: 'Much bananas surround a small exhibition of kiwi.'
 
+
+
+# 8690 --------------------------------------------------------------------------------------
+- IMAGE: './src/000000008690.jpg' ###
+  KEY: 'are petting'
+  ANSWER: 'The two young girls are petting the two goats.'
+
+- IMAGE: './src/000000008690.jpg' 
+  KEY: 'petting'
+  ANSWER: 'Two small children petting animals at a zoo.'
+
+- IMAGE: './src/000000008690.jpg'
+  KEY: 'petting'
+  ANSWER: 'Two young girls petting goats in a pen.'
+
+- IMAGE: './src/000000008690.jpg'
+  KEY: 'is pet'
+  ANSWER: 'Two girls pet a goat that is in a pen.'
+
+- IMAGE: './src/000000008690.jpg'
+  KEY: 'is'
+  ANSWER: 'This is an image of two girls with goats'
+
+# 9400 --------------------------------------------------------------------------------------
+- IMAGE: './src/000000009400.jpg'
+  KEY: 'are sitting'
+  ANSWER: 'A group of people that are sitting in front of laptops.'
+
+- IMAGE: './src/000000009400.jpg'
+  KEY: 'using'
+  ANSWER: 'many people in a room and using the laptops'
+
+- IMAGE: './src/000000009400.jpg'
+  KEY: 'sitting using'
+  ANSWER: 'A group of people sitting around a table using computers.'
+
+- IMAGE: './src/000000009400.jpg'
+  KEY: 'gaze'
+  ANSWER: 'A group of people gaze at laptop screens.'
+
+- IMAGE: './src/000000009400.jpg' ###
+  KEY: 'are sitting using '
+  ANSWER: 'Sever people are sitting next to each other while using laptops.'
+
+# 11760 --------------------------------------------------------------------------------------
+- IMAGE: './src/000000011760.jpg'
+  KEY: 'walking'
+  ANSWER: 'A group of zebras walking away from trees.'
+
+- IMAGE: './src/000000011760.jpg'
+  KEY: 'looking stand'
+  ANSWER: 'Three zebras stand side by side looking at the camera.'
+
+- IMAGE: './src/000000011760.jpg'
+  KEY: 'standing'
+  ANSWER: 'Three zebra standing side by side on a dirt field next to a flowery forest.'
+
+- IMAGE: './src/000000011760.jpg'
+  KEY: 'facing'
+  ANSWER: 'three zebra facing the camera in a field'
+
+- IMAGE: './src/000000011760.jpg'
+  KEY: 'look'
+  ANSWER: 'Three zebras look towards the camera in their habitat.'
+
+# 12667 --------------------------------------------------------------------------------------
+- IMAGE: './src/000000012667.jpg'
+  KEY: 'be has'
+  ANSWER: 'The telephone has a banana where the receiver should be.'
+
+- IMAGE: './src/000000012667.jpg'
+  KEY: 'replacing'
+  ANSWER: 'A banana replacing the phone on an answering machine'
+
+- IMAGE: './src/000000012667.jpg'
+  KEY: 'be'
+  ANSWER: 'A phone with a banana where the receiver should be.'
+
+- IMAGE: './src/000000012667.jpg'
+  KEY: 'replaced has'
+  ANSWER: 'A telephone has it receiver replaced with a banana.'
+
+- IMAGE: './src/000000012667.jpg'
+  KEY: 'placed'
+  ANSWER: 'A banana placed on a phone on a table.'
+
+# 16502 --------------------------------------------------------------------------------------
+- IMAGE: './src/000000016502.jpg'
+  KEY: 'standing growing'
+  ANSWER: 'Goat standing on top of rock pile with grass growing on it'
+
+- IMAGE: './src/000000016502.jpg' ###
+  KEY: 'standing is'
+  ANSWER: 'A sheep is standing on top of a large rock.'
+
+- IMAGE: './src/000000016502.jpg'
+  KEY: 'standing is'
+  ANSWER: 'The sheep is standing all alone on the rock.'
+
+- IMAGE: './src/000000016502.jpg'
+  KEY: 'stands'
+  ANSWER: 'A mountain goat stands on top of a rock on a hill.'
+
+# 183127 --------------------------------------------------------------------------------------
+- IMAGE: './src/0000000183127.jpg'
+  KEY: 'is riding'
+  ANSWER: 'a man is riding a surfboard at the beach'
+
+- IMAGE: './src/0000000183127.jpg'
+  KEY: 'shore is crashing carrying kneeling'
+  ANSWER: 'A huge, crashing wave with lots of spray is carrying a kneeling wet-suited surfer to shore.'
+
+- IMAGE: './src/0000000183127.jpg'
+  KEY: 'coming'
+  ANSWER: 'A surfer coming in on a large wave.'
+
+- IMAGE: './src/0000000183127.jpg' ###
+  KEY: 'surfing'
+  ANSWER: 'A man on a surfboard surfing a large wave.'
+
+- IMAGE: './src/0000000183127.jpg'
+  KEY: 'rides'
+  ANSWER: 'A surfer rides the face of a wave.'
+
+
+
+# 1268 --------------------------------------------------------------------------------------
+- IMAGE: './src/000000001268.jpg'
+  KEY: 'taking'
+  ANSWER: 'A beautiful woman taking a picture with her smart phone.'
+
+- IMAGE: './src/000000001268.jpg'
+  KEY: 'underneath'
+  ANSWER: 'People underneath an arched bridge near the water.'
+
+- IMAGE: './src/000000001268.jpg'
+  KEY: 'taking is fishing'
+  ANSWER: 'A girl is taking a picture of people fishing.'
+
+- IMAGE: './src/000000001268.jpg'
+  KEY: 'taking is'
+  ANSWER: 'The woman is taking a photo of the white goose next to the river.'
+
+- IMAGE: './src/000000001268.jpg'
+  KEY: 'taking sitting'
+  ANSWER: 'A waterway under a bridge with people sitting down and a woman taking a photo.'
+
+
+
+# 1268 --------------------------------------------------------------------------------------
+- IMAGE: './src/000000001268.jpg'
+  KEY: 'taking'
+  ANSWER: 'A beautiful woman taking a picture with her smart phone.'
+
+- IMAGE: './src/000000001268.jpg'
+  KEY: 'underneath'
+  ANSWER: 'People underneath an arched bridge near the water.'
+
+- IMAGE: './src/000000001268.jpg'
+  KEY: 'taking is fishing'
+  ANSWER: 'A girl is taking a picture of people fishing.'
+
+- IMAGE: './src/000000001268.jpg'
+  KEY: 'taking is'
+  ANSWER: 'The woman is taking a photo of the white goose next to the river.'
+
+- IMAGE: './src/000000001268.jpg'
+  KEY: 'taking sitting'
+  ANSWER: 'A waterway under a bridge with people sitting down and a woman taking a photo.'
 
 
