@@ -1,4 +1,59 @@
 ### GroupA
+# 7816 --------------------------------------------------------------------------------------
+- IMAGE: './src/000000007816.jpg' ###
+  KEY: 'riding dressed'
+  ANSWER: 'a rider dressed in white riding a matching white motorcycle '
+
+- IMAGE: './src/000000007816.jpg'
+  KEY: 'driving'
+  ANSWER: 'A person on a motorcycles driving past a group of people behind a fence.'
+
+- IMAGE: './src/000000007816.jpg'
+  KEY: 'watching'
+  ANSWER: 'A guy on a motorcycle with some people watching.'
+
+# 80671 --------------------------------------------------------------------------------------
+- IMAGE: './src/000000080671.jpg'
+  KEY: 'is ski trying'
+  ANSWER: 'A person is trying to ski down a snowy slope.'
+
+- IMAGE: './src/000000080671.jpg'
+  KEY: 'learning is ski'
+  ANSWER: 'The woman is learning how to ski on the snow.'
+
+- IMAGE: './src/000000080671.jpg'
+  KEY: 'is'
+  ANSWER: '"A child is bent over on skis in the snow.'
+
+- IMAGE: './src/000000080671.jpg'
+  KEY: 'has'
+  ANSWER: 'someone that has some skiies on in the snow'
+
+- IMAGE: './src/000000080671.jpg'
+  KEY: 'going touching'
+  ANSWER: 'A woman touching her skis going down a ski hill.'
+
+# 225946 --------------------------------------------------------------------------------------
+- IMAGE: './src/000000225946.jpg'
+  KEY: 'traveling'
+  ANSWER: 'A train traveling through the countryside next to a dirt road.'
+
+- IMAGE: './src/000000225946.jpg'
+  KEY: 'crossing'
+  ANSWER: 'A train heads down some tracks near a railroad crossing sign and a dirt road.'
+
+- IMAGE: './src/000000225946.jpg'
+  KEY: 'is pulling'
+  ANSWER: 'a green white engine is pulling some gray train cars'
+
+- IMAGE: './src/000000225946.jpg'
+  KEY: 'is going'
+  ANSWER: 'A green train is going down the tracks in a rural setting.'
+
+- IMAGE: './src/000000225946.jpg'
+  KEY: 'coming'
+  ANSWER: 'A freight train with a green engine coming down the tracks.'
+
 # 6894 --------------------------------------------------------------------------------------
 - IMAGE: './src/000000006894.jpg' ###
   KEY: 'getting' 
@@ -20,23 +75,148 @@
   KEY: 'is playing'
   ANSWER: 'A man is playing with an elephant in a field.'
 
-# 7816 --------------------------------------------------------------------------------------
-- IMAGE: './src/000000007816.jpg' ###
-  KEY: 'riding dressed'
-  ANSWER: 'a rider dressed in white riding a matching white motorcycle '
+# 270474 --------------------------------------------------------------------------------------
+- IMAGE: './src/000000270474.jpg'
+  KEY: 'holding'
+  ANSWER: 'A little girl holding a baseball bat on grass.'
 
-- IMAGE: './src/000000007816.jpg'
-  KEY: 'driving'
-  ANSWER: 'A person on a motorcycles driving past a group of people behind a fence.'
+- IMAGE: './src/000000270474.jpg'
+  KEY: 'smiling holding'
+  ANSWER: 'A blond girl holding a baseball bat and smiling with her hand over her mouth.'
 
-- IMAGE: './src/000000007816.jpg'
-  KEY: 'watching'
-  ANSWER: 'A guy on a motorcycle with some people watching.'
+- IMAGE: './src/000000270474.jpg'
+  KEY: 'plays wearing'
+  ANSWER: 'a young girl wearing a dress plays with a baseball bat'
+
+- IMAGE: './src/000000270474.jpg'
+  KEY: 'smiles'
+  ANSWER: 'A girl with a baseball bat in the backyard smiles.'
+
+- IMAGE: './src/000000270474.jpg'
+  KEY: 'holding looks'
+  ANSWER: 'A child looks on in amusement while holding a baseball bat.'
+
+# 303566 --------------------------------------------------------------------------------------
+- IMAGE: './src/000000303566.jpg'
+  KEY: 'fruit have'
+  ANSWER: 'A bunch of boxes that have fruit inside of them.'
+
+- IMAGE: './src/000000303566.jpg'
+  KEY: 'choose has'
+  ANSWER: 'An outdoor market has a wide variety of fruit to choose from.'
+
+- IMAGE: './src/000000303566.jpg'
+  KEY: 'are standing'
+  ANSWER: 'People are standing outside near bins of fruit.'
+
+- IMAGE: './src/000000303566.jpg'
+  KEY: 'has'
+  ANSWER: 'A market that has several boxes of fruit in it.'
+
+- IMAGE: './src/000000303566.jpg'
+  KEY: 'displayed'
+  ANSWER: 'Boxes of fruit displayed at an open air market.'
+
+# 263679 --------------------------------------------------------------------------------------
+- IMAGE: './src/000000263679.jpg'
+  KEY: 'standing'
+  ANSWER: 'A man standing on top of a sandy beach near a colorful kite.'
+
+- IMAGE: './src/000000263679.jpg'
+  KEY: 'flying'
+  ANSWER: 'Two people on a beach flying  a kite'
+
+- IMAGE: './src/000000263679.jpg'
+  KEY: 'standing'
+  ANSWER: 'two people standing on the sand of a beach in front of a large colorful kite'
+
+- IMAGE: './src/000000263679.jpg'
+  KEY: 'is holding'
+  ANSWER: 'Two people on the sand of a beach area with a man holding the strings to a large parachute that is partially on the sand.'
+
+- IMAGE: './src/000000263679.jpg'
+  KEY: 'connected holds kite'
+  ANSWER: 'A man holds strings connected to a large parachute or kite on the beach.'
+
+# 532575 --------------------------------------------------------------------------------------
+- IMAGE: './src/000000532575.jpg'
+  KEY: 'rests'
+  ANSWER: 'A dog rests his head on the edge of a boat at sea.'
+
+- IMAGE: './src/000000532575.jpg'
+  KEY: 'laying'
+  ANSWER: '"A large brown and black dog laying on the back of a boat.'
+
+- IMAGE: './src/000000532575.jpg'
+  KEY: 'resting'
+  ANSWER: 'A dog with its face resting on the side of a boat'
+
+# 575081 --------------------------------------------------------------------------------------
+- IMAGE: './src/000000575081.jpg'
+  KEY: 'playing holding'
+  ANSWER: 'A boy holding a game controller and playing a video game.'
+
+- IMAGE: './src/000000575081.jpg'
+  KEY: 'standing holding'
+  ANSWER: 'A young child standing in front of a TV holding a Wii controller.'
+
+- IMAGE: './src/000000575081.jpg'
+  KEY: 'holding plays'
+  ANSWER: 'a kid holding his arm up as he plays a video game in the living room'
+
+- IMAGE: './src/000000575081.jpg'
+  KEY: 'is playing'
+  ANSWER: 'A small child that is playing a game on a video game console.'
+
+- IMAGE: './src/000000575081.jpg'
+  KEY: 'is playing'
+  ANSWER: 'A young boy in his pajamas is playing a video game.'
+
+# 12667 --------------------------------------------------------------------------------------
+- IMAGE: './src/000000012667.jpg'
+  KEY: 'be has'
+  ANSWER: 'The telephone has a banana where the receiver should be.'
+
+- IMAGE: './src/000000012667.jpg'
+  KEY: 'replacing'
+  ANSWER: 'A banana replacing the phone on an answering machine'
+
+- IMAGE: './src/000000012667.jpg'
+  KEY: 'be'
+  ANSWER: 'A phone with a banana where the receiver should be.'
+
+- IMAGE: './src/000000012667.jpg'
+  KEY: 'replaced has'
+  ANSWER: 'A telephone has it receiver replaced with a banana.'
+
+- IMAGE: './src/000000012667.jpg'
+  KEY: 'placed'
+  ANSWER: 'A banana placed on a phone on a table.'
 
 
+### GroupB ------------------------------------------------------------------------------------
+# 183127 --------------------------------------------------------------------------------------
+- IMAGE: './src/0000000183127.jpg'
+  KEY: 'is riding'
+  ANSWER: 'a man is riding a surfboard at the beach'
 
-### GroupB ----------------------------------------------------------------------------------
-# 1268
+- IMAGE: './src/0000000183127.jpg'
+  KEY: 'shore is crashing carrying kneeling'
+  ANSWER: 'A huge, crashing wave with lots of spray is carrying a kneeling wet-suited surfer to shore.'
+
+- IMAGE: './src/0000000183127.jpg'
+  KEY: 'coming'
+  ANSWER: 'A surfer coming in on a large wave.'
+
+- IMAGE: './src/0000000183127.jpg' ###
+  KEY: 'surfing'
+  ANSWER: 'A man on a surfboard surfing a large wave.'
+
+- IMAGE: './src/0000000183127.jpg'
+  KEY: 'rides'
+  ANSWER: 'A surfer rides the face of a wave.'
+
+# 1268 --------------------------------------------------------------------------------------
 - IMAGE: './src/000000001268.jpg'
   KEY: 'taking'
   ANSWER: 'A beautiful woman taking a picture with her smart phone.'
@@ -74,12 +254,6 @@
   KEY: 'is'
   ANSWER: 'a red double decker bus that is in the middle of the road'
 
-
-
-
-
-
-
 # 8690 --------------------------------------------------------------------------------------
 - IMAGE: './src/000000008690.jpg' ###
   KEY: 'are petting'
@@ -100,27 +274,6 @@
 - IMAGE: './src/000000008690.jpg'
   KEY: 'is'
   ANSWER: 'This is an image of two girls with goats'
-
-# 9400 --------------------------------------------------------------------------------------
-- IMAGE: './src/000000009400.jpg'
-  KEY: 'are sitting'
-  ANSWER: 'A group of people that are sitting in front of laptops.'
-
-- IMAGE: './src/000000009400.jpg'
-  KEY: 'using'
-  ANSWER: 'many people in a room and using the laptops'
-
-- IMAGE: './src/000000009400.jpg'
-  KEY: 'sitting using'
-  ANSWER: 'A group of people sitting around a table using computers.'
-
-- IMAGE: './src/000000009400.jpg'
-  KEY: 'gaze'
-  ANSWER: 'A group of people gaze at laptop screens.'
-
-- IMAGE: './src/000000009400.jpg' ###
-  KEY: 'are sitting using '
-  ANSWER: 'Sever people are sitting next to each other while using laptops.'
 
 # 11760 --------------------------------------------------------------------------------------
 - IMAGE: './src/000000011760.jpg'
@@ -143,109 +296,103 @@
   KEY: 'look'
   ANSWER: 'Three zebras look towards the camera in their habitat.'
 
-# 12667 --------------------------------------------------------------------------------------
-- IMAGE: './src/000000012667.jpg'
-  KEY: 'be has'
-  ANSWER: 'The telephone has a banana where the receiver should be.'
+# 276434 --------------------------------------------------------------------------------------
+- IMAGE: './src/000000276434.jpg'
+  KEY: 'cutting wedding'
+  ANSWER: 'Bride and grooms arms cutting the wedding cake with fruit on top.'
 
-- IMAGE: './src/000000012667.jpg'
-  KEY: 'replacing'
-  ANSWER: 'A banana replacing the phone on an answering machine'
+- IMAGE: './src/000000276434.jpg'
+  KEY: 'wedding cuts'
+  ANSWER: 'A couple cuts into a wedding cake with grapes and oranges.'
 
-- IMAGE: './src/000000012667.jpg'
-  KEY: 'be'
-  ANSWER: 'A phone with a banana where the receiver should be.'
+- IMAGE: './src/000000276434.jpg'
+  KEY: 'cut'
+  ANSWER: '"Two hands cut into a cake with fruit on top of it.'
 
-- IMAGE: './src/000000012667.jpg'
-  KEY: 'replaced has'
-  ANSWER: 'A telephone has it receiver replaced with a banana.'
+- IMAGE: './src/000000276434.jpg'
+  KEY: 'cutting fruit has'
+  ANSWER: 'A bridge and groom cutting their wedding cake that has fruit on top.'
 
-- IMAGE: './src/000000012667.jpg'
-  KEY: 'placed'
-  ANSWER: 'A banana placed on a phone on a table.'
+- IMAGE: './src/000000276434.jpg'
+  KEY: 'cutting is'
+  ANSWER: 'a person that is cutting a cake on a tasble'
 
-# 16502 --------------------------------------------------------------------------------------
-- IMAGE: './src/000000016502.jpg'
-  KEY: 'standing growing'
-  ANSWER: 'Goat standing on top of rock pile with grass growing on it'
+# 311394 --------------------------------------------------------------------------------------
+- IMAGE: './src/000000311394.jpg'
+  KEY: 'looking holding'
+  ANSWER: 'A infant holding a baby toothbrush in his hand looking at it.'
 
-- IMAGE: './src/000000016502.jpg' ###
+- IMAGE: './src/000000311394.jpg'
+  KEY: 'is holding'
+  ANSWER: 'A small baby is holding a white and blue toothbrush.'
+
+- IMAGE: './src/000000311394.jpg'
+  KEY: 'holds'
+  ANSWER: 'A child holds a toothbrush in their hand.'
+
+- IMAGE: './src/000000311394.jpg'
+  KEY: 'looking is holding'
+  ANSWER: 'The baby is holding and looking at his tooth brush.'
+
+- IMAGE: './src/000000311394.jpg'
+  KEY: 'holds'
+  ANSWER: 'A baby holds a toothbrush in its hand.'
+
+# 361147 --------------------------------------------------------------------------------------
+- IMAGE: './src/000000361147.jpg'
+  KEY: 'controlled'
+  ANSWER: 'A tennis player shows controlled excitement while a crowd watches.'
+
+- IMAGE: './src/000000361147.jpg'
+  KEY: 'holding'
+  ANSWER: 'A man in a tennis match holding his racket.'
+
+- IMAGE: './src/000000361147.jpg'
+  KEY: 'holding looks'
+  ANSWER: 'The tennis player looks solemn holding his racket.'
+
+- IMAGE: './src/000000361147.jpg'
   KEY: 'standing is'
-  ANSWER: 'A sheep is standing on top of a large rock.'
+  ANSWER: 'A tennis player is standing on a tennis court with a racquet in his hand.'
 
-- IMAGE: './src/000000016502.jpg'
-  KEY: 'standing is'
-  ANSWER: 'The sheep is standing all alone on the rock.'
+# 458255 --------------------------------------------------------------------------------------
+- IMAGE: './src/000000458255.jpg'
+  KEY: 'laying is'
+  ANSWER: 'A little girl is laying in bed with a book and a cat is next to her.'
 
-- IMAGE: './src/000000016502.jpg'
-  KEY: 'stands'
-  ANSWER: 'A mountain goat stands on top of a rock on a hill.'
+- IMAGE: './src/000000458255.jpg'
+  KEY: 'laying reading sitting'
+  ANSWER: 'a woman laying in bed reading a book with a cat sitting on top'
 
-# 183127 --------------------------------------------------------------------------------------
-- IMAGE: './src/0000000183127.jpg'
-  KEY: 'is riding'
-  ANSWER: 'a man is riding a surfboard at the beach'
+- IMAGE: './src/000000458255.jpg'
+  KEY: 'reading'
+  ANSWER: 'A girl reading a book in bed with a cat'
 
-- IMAGE: './src/0000000183127.jpg'
-  KEY: 'shore is crashing carrying kneeling'
-  ANSWER: 'A huge, crashing wave with lots of spray is carrying a kneeling wet-suited surfer to shore.'
+- IMAGE: './src/000000458255.jpg'
+  KEY: 'laying holding'
+  ANSWER: 'A little girl laying in bed holding a book next to a black cat.'
 
-- IMAGE: './src/0000000183127.jpg'
+- IMAGE: './src/000000458255.jpg'
+  KEY: 'reading lies petting'
+  ANSWER: 'A woman lies in bed reading a book, and petting a cat.'
+
+# 575205 --------------------------------------------------------------------------------------
+- IMAGE: './src/000000575205.jpg'
+  KEY: 'is land preparing'
+  ANSWER: 'A small plane is preparing to land on the strip'
+
+- IMAGE: './src/000000575205.jpg'
   KEY: 'coming'
-  ANSWER: 'A surfer coming in on a large wave.'
+  ANSWER: 'A small airplane coming in for a landing.'
 
-- IMAGE: './src/0000000183127.jpg' ###
-  KEY: 'surfing'
-  ANSWER: 'A man on a surfboard surfing a large wave.'
+- IMAGE: './src/000000575205.jpg'
+  KEY: 'is'
+  ANSWER: 'A small airplane is in the air on a runway.'
 
-- IMAGE: './src/0000000183127.jpg'
-  KEY: 'rides'
-  ANSWER: 'A surfer rides the face of a wave.'
-
-
-
-# 1268 --------------------------------------------------------------------------------------
-- IMAGE: './src/000000001268.jpg'
+- IMAGE: './src/000000575205.jpg'
   KEY: 'taking'
-  ANSWER: 'A beautiful woman taking a picture with her smart phone.'
+  ANSWER: 'A Plane on runway taking off above ground.'
 
-- IMAGE: './src/000000001268.jpg'
-  KEY: 'underneath'
-  ANSWER: 'People underneath an arched bridge near the water.'
-
-- IMAGE: './src/000000001268.jpg'
-  KEY: 'taking is fishing'
-  ANSWER: 'A girl is taking a picture of people fishing.'
-
-- IMAGE: './src/000000001268.jpg'
-  KEY: 'taking is'
-  ANSWER: 'The woman is taking a photo of the white goose next to the river.'
-
-- IMAGE: './src/000000001268.jpg'
-  KEY: 'taking sitting'
-  ANSWER: 'A waterway under a bridge with people sitting down and a woman taking a photo.'
-
-
-
-# 1268 --------------------------------------------------------------------------------------
-- IMAGE: './src/000000001268.jpg'
+- IMAGE: './src/000000575205.jpg'
   KEY: 'taking'
-  ANSWER: 'A beautiful woman taking a picture with her smart phone.'
-
-- IMAGE: './src/000000001268.jpg'
-  KEY: 'underneath'
-  ANSWER: 'People underneath an arched bridge near the water.'
-
-- IMAGE: './src/000000001268.jpg'
-  KEY: 'taking is fishing'
-  ANSWER: 'A girl is taking a picture of people fishing.'
-
-- IMAGE: './src/000000001268.jpg'
-  KEY: 'taking is'
-  ANSWER: 'The woman is taking a photo of the white goose next to the river.'
-
-- IMAGE: './src/000000001268.jpg'
-  KEY: 'taking sitting'
-  ANSWER: 'A waterway under a bridge with people sitting down and a woman taking a photo.'
-
-
+  ANSWER: 'a small plane taking off from a run way in mid air'
