@@ -26,14 +26,7 @@ def make_dataset(imagevec, infovec):
     keydata = torch.zeros(data_num*2,300)
     ansdata = torch.zeros(data_num*2,300)
     labeldata = torch.zeros(data_num*2,)
-    # capdata = torch.zeros(data_num,300)
-    # noisecapdata = torch.zeros(data_num,300)
-    # print(imagedata)
-    # print(type(imagedata))
-    # print(imagedata.shape)
-    # print(textdata)
-    # print(type(textdata))
-    # print(textdata.shape)
+
     idx = 0
     for i, image in enumerate(tqdm(imagevec, total=len(imagevec))):
         for key, caption, noise_caption in zip(infovec[0][i], infovec[1][i], infovec[2][i]): 
@@ -49,32 +42,10 @@ def make_dataset(imagevec, infovec):
                 keydata[idx] = key
                 ansdata[idx] = noise_caption
                 labeldata[idx] = 0
-                
-                # print('imagedata')
-                # print(imagedata)
-                # print(type(imagedata))
-                # print(imagedata.shape)
-
-                # print('keydata')
-                # print(keydata)
-                # print(type(keydata))
-                # print(keydata.shape)
-
-                # print('capdata')
-                # print(capdata)
-                # print(type(capdata))
-                # print(capdata.shape)
-
-                # print('noisecapdata')
-                # print(noisecapdata)
-                # print(type(noisecapdata))
-                # print(noisecapdata.shape)
 
                 idx += 1
             else:
                 continue
-
-        # dataset = (imagedata[:idx], keydata[:idx], ansdata[:idx], labeldata[:idx])
     
     return imagedata[:idx], keydata[:idx], ansdata[:idx], labeldata[:idx]
 

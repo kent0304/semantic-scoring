@@ -17,9 +17,10 @@ from torchvision import transforms, models
 from tqdm import tqdm 
 
 def load_img2info():
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/train2017_img2info.pkl', 'rb') as f:
+    
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/train2017_img2infobert.pkl', 'rb') as f:
         train_img2info = pickle.load(f) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/val2017_img2info.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/train2017_img2infobert.pkl', 'rb') as f:
         val_img2info = pickle.load(f)
     return train_img2info, val_img2info
 
@@ -58,22 +59,14 @@ def info2vec(imgpaths, img2info, fasttext_model):
     info_vec = torch.zeros(3, len(imgpaths), 10, 300)
     for i, img in enumerate(tqdm(imgpaths, total=len(imgpaths))):
         id = int(img[-16:-4])
-        for j, (key, caption, noise_caption) in enumerate(zip(img2info[id]['key'], img2info[id]['captions'], img2info[id]['noise_captions'])):
+        for j, (key, caption, noise_caption) in enumerate(zip(img2info[id]['key'], img2info[id]['captions'], img2info[id]['bert_noise_captions'])):
             key_vec = text2vec(' '.join(key), fasttext_model)
             cap_vec = text2vec(caption, fasttext_model)
             noisecap_vec = text2vec(noise_caption, fasttext_model)
-            # print('key:', key)
-            # print(key_vec)
-            # print('caprion:', caption)
-            # print(cap_vec)
-            # print('noise_caption:', noise_caption)
-            # print(noisecap_vec)
 
             info_vec[0][i][j] += key_vec
             info_vec[1][i][j] += cap_vec
             info_vec[2][i][j] += noisecap_vec
-        # if i>2:
-        #     break
 
     return info_vec
 
@@ -110,19 +103,14 @@ def main():
     print("Get info vector (3, len(imgpaths), 10, 300) tensor")
     train_infovec = info2vec(train_imagpaths, train_img2info, fasttext_model)
     print("picleで保存")
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/train2017_infovec.pkl', 'wb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/train2017_bertinfovec.pkl', 'wb') as f:
         pickle.dump(train_infovec, f) 
     val_infovec = info2vec(val_imagpaths, val_img2info, fasttext_model)
     print("picleで保存")
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/val2017_infovec.pkl', 'wb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/val2017_bertinfovec.pkl', 'wb') as f:
         pickle.dump(val_infovec, f) 
     print("完了!!")
 
-
-    # print(val_infovec)
-    # print(type(val_infovec))
-    # print(val_infovec.shape)    
-    
 
 
 if __name__ == '__main__':

@@ -4,39 +4,6 @@ from transformers import BertTokenizer, BertForPreTraining
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 model = BertForPreTraining.from_pretrained('bert-base-uncased')
 
-text = "A train traveling through the [MASK] next to a dirt road."
-candidate = ["countryside", "hell", "school", "zoo"]
-
-# トークン分割
-tokens = tokenizer.tokenize(text)
-masked_index = tokens.index("[MASK]")
-
-tokens = ["[CLS]"] + tokens + ["[SEP]"]
-print(tokens)
-
-
-# BERTで予測
-ids = tokenizer.convert_tokens_to_ids(tokens)
-ids = torch.tensor(ids).reshape(1,-1)  # バッチサイズ1の形に整形
-
-with torch.no_grad():
-    outputs = model(ids)
-predictions = outputs.prediction_logits[0]
-
-_, predicted_indexes = torch.topk(predictions[masked_index], k=30)
-
-predicted_tokens = tokenizer.convert_ids_to_tokens(predicted_indexes.tolist())
-print(predicted_tokens)
-
-# for i, v in enumerate(predicted_tokens):
-#     if v in candidate:
-#         print(i, v)
-#         break
-
-
-
-
-
 # 疑似誤り文（ノイズ）を生成し、img2infoの辞書で保管。
 import json 
 import random
@@ -117,10 +84,10 @@ def main():
 
     # 画像のidをkey {key, captions, noise_captions}をvalueにした辞書
     train_img2infobert = build_img2info(train_img2info)
-    val_img2infobert = build_img2info(val_img2info)
-
     with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/train2017_img2infobert.pkl', 'wb') as f:
         pickle.dump(train_img2infobert, f) 
+        
+    val_img2infobert = build_img2info(val_img2info)
     with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/val2017_img2infobert.pkl', 'wb') as f:
         pickle.dump(val_img2infobert, f) 
 
