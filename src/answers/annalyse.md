@@ -113,7 +113,7 @@
 - tooth brashi / toothbrush
 
 # Based on image
-## noun 6
+## 画像と一致しない名詞 6
 - snow boading / sking
 - woods / wasteland
 - danbo / elephant
@@ -121,7 +121,7 @@
 - my friend / a man
 - a pet / pets
 
-## verb 2
+## 画像と一致しない動詞 2
 - a bird sitting / a bird standing
 - is laughing / raise a clenched fist
 
@@ -129,10 +129,10 @@
 - 年齢
 - 目的語が不明（wears the write short）
 
-## 解答者が主語になっている 1
+## 解答者の意見 1
 - I like surf
 
-## The number of object 2
+## 対象オブジェクトの数 2
 - two / three
 - He / Some people
 
@@ -144,22 +144,29 @@
 
 
 # まとめ
+## 軽微な文法誤り
 - 冠詞の誤り 21
+- スペル 16
+- カンマ 2
+- 不適切名詞 4
+- 固有名詞大文字 1
+
+## 文法誤り 50
 - 3単現のs 15
 - 複数形 4
 - 動詞の活用 16
-- カンマ 2
-- スペル 16
 - 前置詞 8
 - 不適切な動詞 2
 - 時制 1
-- 固有名詞大文字 1
-- 不適切名詞 4
-- noun 6
-- verb 2
+
+## 画像の内容 13
+- 画像と一致しない名詞 6
+- 画像と一致しない動詞 2
 - 余分な情報 2
-- 解答者が主語になっている 1
-- The number of object 2
+- 解答者の意見　1
+- 対象オブジェクトの数 2
+
+## その他
 - 文になっていない 4
 
 
