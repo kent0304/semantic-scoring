@@ -77,19 +77,34 @@ def main():
     train_img2info = open('/mnt/LSTA5/data/tanaka/lang-learn/coco/train_img2info.json', 'r')
     val_img2info = open('/mnt/LSTA5/data/tanaka/lang-learn/coco/val_img2info.json', 'r')
     
-    # # read as json
+    # read as json
     train_img2info = json.load(train_img2info)
     val_img2info = json.load(val_img2info)
 
 
     # 画像のidをkey {key, captions, noise_captions}をvalueにした辞書
     train_img2infobert = build_img2info(train_img2info)
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/train2017_img2infobert.pkl', 'wb') as f:
-        pickle.dump(train_img2infobert, f) 
-        
+    # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/train2017_img2infobert.pkl', 'wb') as f:
+    #     pickle.dump(train_img2infobert, f)   
     val_img2infobert = build_img2info(val_img2info)
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/val2017_img2infobert.pkl', 'wb') as f:
-        pickle.dump(val_img2infobert, f) 
+    # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/val2017_img2infobert.pkl', 'wb') as f:
+    #     pickle.dump(val_img2infobert, f) 
+
+
+    # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/train2017_img2infobert.pkl', 'rb') as f:
+    #     train_img2info = pickle.load(f) 
+    # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/val2017_img2infobert.pkl', 'rb') as f:
+    #     val_img2info = pickle.load(f) 
+
+    
+    # 辞書をjsonとして書き込み
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/train_img2infobert.json', 'w') as f:
+        json.dump(train_img2info, f, indent=4, default=set_default)
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/val_img2infobert.json', 'w') as f:
+        json.dump(val_img2info, f, indent=4, default=set_default)
+
+
+    
 
 
 

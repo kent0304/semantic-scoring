@@ -18,25 +18,25 @@ from tqdm import tqdm
 
 def load_img2info():
     
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/train2017_img2infobert.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/train2017_img2infobert.pkl', 'rb') as f:
         train_img2info = pickle.load(f) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/train2017_img2infobert.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/val2017_img2infobert.pkl', 'rb') as f:
         val_img2info = pickle.load(f)
     return train_img2info, val_img2info
 
 # Get image paths list
 def get_imagepaths():
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/train2017_imagepaths.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/images/train2017_imagepaths.pkl', 'rb') as f:
         train_imagpaths = pickle.load(f)
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/valid2017_imagepaths.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/images/valid2017_imagepaths.pkl', 'rb') as f:
         val_imagpaths = pickle.load(f)
     return train_imagpaths, val_imagpaths
 
 # Get image vector 2048dim tensor
 def get_imagevec():
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/train2017_images.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/images/train2017_images.pkl', 'rb') as f:
         train_imagevec =  pickle.load(f) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/val2017_images.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/images/val2017_images.pkl', 'rb') as f:
         val_imagevec =  pickle.load(f) 
     return train_imagevec, val_imagevec
 
@@ -59,7 +59,8 @@ def info2vec(imgpaths, img2info, fasttext_model):
     info_vec = torch.zeros(3, len(imgpaths), 10, 300)
     for i, img in enumerate(tqdm(imgpaths, total=len(imgpaths))):
         id = int(img[-16:-4])
-        for j, (key, caption, noise_caption) in enumerate(zip(img2info[id]['key'], img2info[id]['captions'], img2info[id]['bert_noise_captions'])):
+
+        for j, (key, caption, noise_caption) in enumerate(zip(img2info[str(id)]['key'], img2info[str(id)]['captions'], img2info[str(id)]['bert_noise_captions'])):
             key_vec = text2vec(' '.join(key), fasttext_model)
             cap_vec = text2vec(caption, fasttext_model)
             noisecap_vec = text2vec(noise_caption, fasttext_model)

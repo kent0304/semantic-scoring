@@ -6,17 +6,17 @@ from tqdm import tqdm
 
 
 def load_infovec():
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/train2017_infovec.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/train2017_bertinfovec.pkl', 'rb') as f:
         train_infovec = pickle.load(f) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/val2017_infovec.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/val2017_bertinfovec.pkl', 'rb') as f:
         val_infovec = pickle.load(f) 
     return train_infovec, val_infovec
 
 # Get image vector 2048dim tensor
 def get_imagevec():
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/train2017_images.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/images/train2017_images.pkl', 'rb') as f:
         train_imagevec =  pickle.load(f) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/val2017_images.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/images/val2017_images.pkl', 'rb') as f:
         val_imagevec =  pickle.load(f) 
     return train_imagevec, val_imagevec
 
@@ -64,30 +64,28 @@ def main():
     # train_dataset = make_dataset(train_imagevec, train_infovec)
     imagedata, keydata, ansdata, labeldata = make_dataset(train_imagevec, train_infovec)
     print("保存中...")
-    # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/train2017_semantic_scoring_datasetvec.pkl', 'wb') as f:
-    #     pickle.dump(train_dataset, f, protocol=4)
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/train_semantic_scoring/imagedata.pkl', 'wb') as f:
+
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/imagedata.pkl', 'wb') as f:
         pickle.dump(imagedata, f, protocol=4)
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/train_semantic_scoring/keydata.pkl', 'wb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/keydata.pkl', 'wb') as f:
         pickle.dump(keydata, f, protocol=4) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/train_semantic_scoring/ansdata.pkl', 'wb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/ansdata.pkl', 'wb') as f:
         pickle.dump(ansdata, f, protocol=4) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/train_semantic_scoring/labeldata.pkl', 'wb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/labeldata.pkl', 'wb') as f:
         pickle.dump(labeldata, f, protocol=4) 
     print("完了")
 
     # val_dataset = make_dataset(val_imagevec, val_infovec)
     imagedata, keydata, ansdata, labeldata = make_dataset(val_imagevec, val_infovec)
     print("保存中...")
-    # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/val2017_semantic_scoring_datasetvec.pkl', 'wb') as f:
-    #     pickle.dump(val_dataset, f, protocol=4)
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/val_semantic_scoring/imagedata.pkl', 'wb') as f:
+
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/imagedata.pkl', 'wb') as f:
         pickle.dump(imagedata, f, protocol=4)
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/val_semantic_scoring/keydata.pkl', 'wb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/keydata.pkl', 'wb') as f:
         pickle.dump(keydata, f, protocol=4) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/val_semantic_scoring/ansdata.pkl', 'wb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/ansdata.pkl', 'wb') as f:
         pickle.dump(ansdata, f, protocol=4) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/val_semantic_scoring/labeldata.pkl', 'wb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/labeldata.pkl', 'wb') as f:
         pickle.dump(labeldata, f, protocol=4) 
     print("完了")
 

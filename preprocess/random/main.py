@@ -103,12 +103,14 @@ def main():
 
     train_corpus, train_nn = load_corpus(train2017)
     val_corpus, val_nn = load_corpus(val2017)
+
     # 文がリストで管理されたコーパス
     corpus = train_corpus + val_corpus
     c = '\n'.join(corpus)
     # コーパスファイル書き込み
     # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/annotations/corpus.txt', 'w') as f:
     #     f.write(c)
+
     # 名詞のリストはnnで管理
     nn = train_nn + val_nn
     print("nnのリストの要素数は", len(nn))
@@ -118,10 +120,23 @@ def main():
     # 画像のidをkey {key, captions, noise_captions}をvalueにした辞書
     train_img2info = build_img2info(train2017, corpus, nn)
     val_img2info = build_img2info(val2017, corpus, nn)
+    
     # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/train2017_img2info.pkl', 'wb') as f:
     #     pickle.dump(train_img2info, f) 
     # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/val2017_img2info.pkl', 'wb') as f:
     #     pickle.dump(val_img2info, f) 
+
+    # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/train2017_img2info.pkl', 'rb') as f:
+    #     train_img2info = pickle.load(f) 
+    # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/val2017_img2info.pkl', 'rb') as f:
+    #     val_img2info = pickle.load(f) 
+
+    
+    # 辞書をjsonとして書き込み
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/train_img2info.json', 'w') as f:
+        json.dump(train_img2info, f, indent=4, default=set_default)
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/val_img2info.json', 'w') as f:
+        json.dump(val_img2info, f, indent=4, default=set_default)
 
 
 
