@@ -25,11 +25,11 @@ device = torch.device('cuda:1')
 def load_model():
     # 学習済みモデル読み込み
     model = Model()
-    model.load_state_dict(torch.load('model/model_epoch190.pth', map_location=device))
+    model.load_state_dict(torch.load('model/bert/model_adam_epoch500.pth', map_location=device))
     return model
 
 def load_data():
-    with open('src/input.yml') as f:
+    with open('src/input_real.yml') as f:
         obj = yaml.safe_load(f)
     return obj
 
@@ -51,10 +51,6 @@ def embedding(obj):
 
     return imagevec, keyvec, ansvec
     
-
-
-
-
         
 def image2vec(image_net, image_paths):
     # 画像を Tensor に変換
@@ -132,10 +128,11 @@ def main():
     obj = load_data()
     imagevec, keyvec, ansvec = embedding(obj)
     result = eval(model, imagevec, keyvec, ansvec)
-    for score in result:
-        print(score)
+    # for score in result:
+    #     print(score)
     print(result)
 
+    return 
 
 
 if __name__ == '__main__':

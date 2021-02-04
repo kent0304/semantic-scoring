@@ -16,27 +16,23 @@ device = torch.device('cuda:1')
 
 def load_data():
     print("Reading train  data...")
-    # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/train2017_semantic_scoring_datasetvec.pkl', 'rb') as f:
-    #     train2017_semantic_scoring_datasetvec = pickle.load(f) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/train_semantic_scoring/imagedata.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/imagedata.pkl', 'rb') as f:
         train_imagedata = pickle.load(f) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/train_semantic_scoring/keydata.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/keydata.pkl', 'rb') as f:
         train_keydata = pickle.load(f) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/train_semantic_scoring/ansdata.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/ansdata.pkl', 'rb') as f:
         train_ansdata = pickle.load(f) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/train_semantic_scoring/labeldata.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/labeldata.pkl', 'rb') as f:
         train_labeldata = pickle.load(f) 
 
     print("Reading val data...")
-    # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/val2017_semantic_scoring_datasetvec.pkl', 'rb') as f:
-    #     val2017_semantic_scoring_datasetvec = pickle.load(f)  
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/train_semantic_scoring/imagedata.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/imagedata.pkl', 'rb') as f:
         val_imagedata = pickle.load(f) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/train_semantic_scoring/keydata.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/keydata.pkl', 'rb') as f:
         val_keydata = pickle.load(f) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/train_semantic_scoring/ansdata.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/ansdata.pkl', 'rb') as f:
         val_ansdata = pickle.load(f) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/train_semantic_scoring/labeldata.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/labeldata.pkl', 'rb') as f:
         val_labeldata = pickle.load(f) 
 
     train_dataset = MyDataset(train_imagedata, train_keydata, train_ansdata, train_labeldata)
@@ -124,13 +120,13 @@ def train_net(model, train_loader, valid_loader, loss, n_iter, device):
         # 学習モデル保存
         if (epoch+1)%1==0:
             # 学習させたモデルの保存パス
-            model_path =  f'model/model0112_epoch{epoch+1}.pth'
+            model_path =  f'model/bert/model_adam_epoch{epoch+1}.pth'
             # モデル保存
             torch.save(model.to('cpu').state_dict(), model_path)
             # loss保存
-            with open('model/train_losses.pkl', 'wb') as f:
+            with open('model/bert/train_losses.pkl', 'wb') as f:
                 pickle.dump(train_losses, f) 
-            with open('model/valid_losses.pkl', 'wb') as f:
+            with open('model/bert/valid_losses.pkl', 'wb') as f:
                 pickle.dump(valid_losses, f) 
             # グラフ描画
             my_plot(train_losses, valid_losses)
@@ -150,7 +146,7 @@ def my_plot(train_losses, valid_losses):
     #グラフの凡例
     plt.legend()
     # グラフ画像保存
-    fig.savefig("losstest.png")
+    fig.savefig("bert_loss.png")
 
 def select_epoch(valid_losses):
     min_loss = min(valid_losses)
@@ -170,7 +166,7 @@ def main():
                                            train_loader=train_loader, 
                                            valid_loader=valid_loader,  
                                            loss=loss, 
-                                           n_iter=200, 
+                                           n_iter=500, 
                                            device=device)
     best_epoch = select_epoch(valid_losses)
     print(f'{best_epoch}epochのモデルが最もvalid lossが下がった。')
