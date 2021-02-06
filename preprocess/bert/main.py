@@ -13,7 +13,8 @@ import nltk
 nltk.download('punkt')
 # pos_tag
 nltk.download('averaged_perceptron_tagger')
-
+# wordnet
+from nltk.corpus import wordnet as wn
 from tqdm import tqdm
 
 
@@ -21,19 +22,20 @@ def build_img2info(json_obj):
     # 画像のidをkey (key, caption, noise caption)をvalue
     img2info = {}
     idx=0
-    print(type(json_obj))
     for dic in tqdm(json_obj.values(), total=len(json_obj)):
         new_noise = []
         for caption in dic['captions']:
             # 形態素解析
-            morph = nltk.word_tokenize(caption)
+            morph = nltk.word_tokenize(caption.lower())
             pos = nltk.pos_tag(morph)
             morph = ["[CLS]"] + morph + ["[SEP]"]
+            # print('トークンに分割-------------------------------------------------')
+            # print('形態素解析結果:', morph)
             final_noise_caption = morph.copy()
         
             for i, token in enumerate(pos):
                 # 名詞句はランダム置換
-                if token[1] == 'NN' or token[1] == 'NNS':
+                if token[1] == 'NN' or token[1] == 'NNS': # 名詞 or 名詞（複数形） 
                     # ノイズキャプション生成
                     noise_caption = morph.copy()
                     noise_caption[i+1] = '[MASK]'
@@ -46,15 +48,32 @@ def build_img2info(json_obj):
                         outputs = model(ids)
                     predictions = outputs.prediction_logits[0]
 
-                    _, predicted_indexes = torch.topk(predictions[i+1], k=5)
+                    _, predicted_indexes = torch.topk(predictions[i+1], k=20)
 
                     predicted_tokens = tokenizer.convert_ids_to_tokens(predicted_indexes.tolist())
-                    # print(predicted_tokens)
-                    for j, (v, pos) in enumerate(nltk.pos_tag(predicted_tokens)):
-                        if v != morph[i+1] and v != '[UNK]'  and (pos == 'NN' or pos == 'NNS'):
-                            # print(v)
-                            final_noise_caption[i+1] = v
-                            break      
+                    # print('今回対象のトークン:', token[0])
+                    # print('BERTで予測した置き換えられる語:', predicted_tokens)
+                    for j, word in enumerate(predicted_tokens):
+                        if word != morph[i+1] and word != '[UNK]': # 置き換える語と同じでない
+                            try:
+                                w1 = wn.synset(token[0] + '.n.01')
+                            except nltk.corpus.reader.wordnet.WordNetError: # wordnetに存在しない場合
+                                # print('そもそもwordnetに存在しないので比較できない', token[0])
+                                # print(word, 'で決定')
+                                final_noise_caption[i+1] = word
+                                break
+                            # 置換対象との類似度を比較
+                            try: 
+                                w2 = wn.synset(word + '.n.01')
+                                if w1.wup_similarity(w2) < 0.5: # 類似度0.5未満なら採用
+                                    # print(word, 'で決定')
+                                    final_noise_caption[i+1] = word
+                                    break
+                                else: # 類似度0.5以上なら次の候補へ
+                                    continue
+                            except nltk.corpus.reader.wordnet.WordNetError: 
+                                continue 
+
             final_noise_caption = final_noise_caption[1:-1]   
             final_noise_caption = ' '.join(final_noise_caption)          
             # print('最終形態')    
@@ -62,9 +81,38 @@ def build_img2info(json_obj):
             # 名詞句をbert言語モデルで尤もらしい名詞句に変換
             new_noise.append(final_noise_caption)
         # 更新
-        dic['bert_noise_captions'] = new_noise
+        dic['bert_wn05_noise_captions'] = new_noise
         
     return json_obj
+
+
+# def check(word):
+#     """
+#     入れ替えれる単語が好ましくなければFalse
+#     """
+#     spaces = ['\u200b', '\u200e', '\u202a', '\u2009', '\u2028', '\u202c', '\ufeff', '\uf0d8', '\u2061', '\u3000', '\x10', '\x7f', '\x9d', '\xad',
+#             '\x97', '\x9c', '\x8b', '\x81', '\x80', '\x8c', '\x85', '\x92', '\x88', '\x8d', '\x80', '\x8e', '\x9a', '\x94', '\xa0', 
+#             '\x8f', '\x82', '\x8a', '\x93', '\x90', '\x83', '\x96', '\x9b', '\x9e', '\x99', '\x87', '\x84', '\x9f',
+#             ]
+#     puncts = [',', '.', '"', ':', ')', '(', '-', '!', '?', '|', ';', "'", '$', '&', '/', '[', ']', '>', '%', '=', '#', '*', '+', '\\', '•',  '~', '@', '£',
+#             '·', '_', '{', '}', '©', '^', '®', '`',  '<', '→', '°', '€', '™', '›',  '♥', '←', '×', '§', '″', '′', 'Â', '█', '½', 'à', '…', '\n', '\xa0', '\t',
+#             '“', '★', '”', '–', '●', 'â', '►', '−', '¢', '²', '¬', '░', '¶', '↑', '±', '¿', '▾', '═', '¦', '║', '―', '¥', '▓', '—', '‹', '─', '\u3000', '\u202f',
+#             '▒', '：', '¼', '⊕', '▼', '▪', '†', '■', '’', '▀', '¨', '▄', '♫', '☆', 'é', '¯', '♦', '¤', '▲', 'è', '¸', '¾', 'Ã', '⋅', '‘', '∞', '«',
+#             '∙', '）', '↓', '、', '│', '（', '»', '，', '♪', '╩', '╚', '³', '・', '╦', '╣', '╔', '╗', '▬', '❤', 'ï', 'Ø', '¹', '≤', '‡', '√', '（', '）', '～',
+#             '➡', '％', '⇒', '▶', '「', '➄', '➆',  '➊', '➋', '➌', '➍', '⓪', '①', '②', '③', '④', '⑤', '⑰', '❶', '❷', '❸', '❹', '❺', '❻', '❼', '❽',  
+#             '＝', '※', '㈱', '､', '△', '℮', 'ⅼ', '‐', '｣', '┝', '↳', '◉', '／', '＋', '○',
+#             '【', '】', '✅', '☑', '➤', 'ﾞ', '↳', '〶', '☛', '｢', '⁺', '『', '≫',
+#             ] 
+#     if word in spaces:
+#         return False 
+#     elif word in puncts:
+#         return False
+#     else:
+#         return True
+
+    
+
+    
             
 
 
@@ -82,15 +130,16 @@ def main():
     val_img2info = json.load(val_img2info)
 
 
+    # 辞書をそのままpickleで保存
     # 画像のidをkey {key, captions, noise_captions}をvalueにした辞書
     train_img2infobert = build_img2info(train_img2info)
-    # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/train2017_img2infobert.pkl', 'wb') as f:
-    #     pickle.dump(train_img2infobert, f)   
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/train2017_img2infobert.pkl', 'wb') as f:
+        pickle.dump(train_img2infobert, f)   
     val_img2infobert = build_img2info(val_img2info)
-    # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/val2017_img2infobert.pkl', 'wb') as f:
-    #     pickle.dump(val_img2infobert, f) 
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/val2017_img2infobert.pkl', 'wb') as f:
+        pickle.dump(val_img2infobert, f) 
 
-
+    
     # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/train2017_img2infobert.pkl', 'rb') as f:
     #     train_img2info = pickle.load(f) 
     # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/val2017_img2infobert.pkl', 'rb') as f:
@@ -98,9 +147,9 @@ def main():
 
     
     # 辞書をjsonとして書き込み
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/train_img2infobert.json', 'w') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/new_train_img2infobert.json', 'w') as f:
         json.dump(train_img2info, f, indent=4, default=set_default)
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/val_img2infobert.json', 'w') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/new_val_img2infobert.json', 'w') as f:
         json.dump(val_img2info, f, indent=4, default=set_default)
 
 
