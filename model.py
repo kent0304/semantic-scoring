@@ -17,19 +17,19 @@ class Model(nn.Module):
         super().__init__()
         self.image_fc1 = nn.Linear(2048, 1536)
         self.image_fc2 = nn.Linear(1536, 1024)
-        self.image_fc3 = nn.Linear(1024, 512)
+        self.image_fc3 = nn.Linear(1024, 768)
 
-        self.key_fc1 = nn.Linear(300, 372)
-        self.key_fc2 = nn.Linear(372, 446)
-        self.key_fc3 = nn.Linear(446, 512)
+        self.key_fc1 = nn.Linear(768, 768)
+        self.key_fc2 = nn.Linear(768, 768)
+        # self.key_fc3 = nn.Linear(446, 512)
 
-        self.ans_fc1 = nn.Linear(300, 372)
-        self.ans_fc2 = nn.Linear(372, 446)
-        self.ans_fc3 = nn.Linear(446, 512)
+        self.ans_fc1 = nn.Linear(768, 768)
+        self.ans_fc2 = nn.Linear(768, 768)
+        # self.ans_fc3 = nn.Linear(600, 512)
 
-        self.total_fc1 = nn.Linear(1536, 768)
-        self.total_fc2 = nn.Linear(768, 384)
-        self.total_fc3 = nn.Linear(384, 1)
+        self.total_fc1 = nn.Linear(2304, 1536)
+        self.total_fc2 = nn.Linear(1536, 768)
+        self.total_fc3 = nn.Linear(768, 1)
 
 
 
@@ -39,12 +39,12 @@ class Model(nn.Module):
         image = self.image_fc3(image)
 
         key = F.relu(self.key_fc1(key))
-        key = F.relu(self.key_fc2(key))
-        key = self.key_fc3(key)
+        # key = F.relu(self.key_fc2(key))
+        key = self.key_fc2(key)
 
         ans = F.relu(self.ans_fc1(ans))
-        ans = F.relu(self.ans_fc2(ans))
-        ans = self.ans_fc3(ans)
+        # ans = F.relu(self.ans_fc2(ans))
+        ans = self.ans_fc2(ans)
 
         input_feature = torch.cat([image, key, ans], axis=1)
 
