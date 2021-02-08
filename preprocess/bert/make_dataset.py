@@ -23,14 +23,14 @@ def get_imagevec():
 def make_dataset(imagevec, infovec):
     data_num = len(infovec[0]) * len(infovec[0][0])
     imagedata = torch.zeros(data_num*2,2048)
-    keydata = torch.zeros(data_num*2,300)
-    ansdata = torch.zeros(data_num*2,300)
+    keydata = torch.zeros(data_num*2,768)
+    ansdata = torch.zeros(data_num*2,768)
     labeldata = torch.zeros(data_num*2,)
 
     idx = 0
     for i, image in enumerate(tqdm(imagevec, total=len(imagevec))):
         for key, caption, noise_caption in zip(infovec[0][i], infovec[1][i], infovec[2][i]): 
-            if (not torch.equal(key, torch.zeros(300)) and not torch.isnan(key).any()) and (not torch.equal(caption, torch.zeros(300)) and not torch.isnan(caption).any()) and (not torch.equal(noise_caption, torch.zeros(300)) and not torch.isnan(noise_caption).any()):
+            if (not torch.equal(key, torch.zeros(768)) and not torch.isnan(key).any()) and (not torch.equal(caption, torch.zeros(768)) and not torch.isnan(caption).any()) and (not torch.equal(noise_caption, torch.zeros(768)) and not torch.isnan(noise_caption).any()):
                 # 先に正解文
                 imagedata[idx] = image 
                 keydata[idx] = key
@@ -51,8 +51,8 @@ def make_dataset(imagevec, infovec):
 
 
 def main():
-    # Get info vector (3, len(imgpaths), 10, 300) tensor
-    print("Get info vector (3, len(imgpaths), 10, 300) tensor")
+    # Get info vector (3, len(imgpaths), 10, 768) tensor
+    print("Get info vector (3, len(imgpaths), 10, 768) tensor")
     train_infovec, val_infovec = load_infovec()
 
     # Get image vector 2048dim tensor

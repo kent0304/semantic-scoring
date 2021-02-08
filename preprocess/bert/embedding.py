@@ -103,16 +103,16 @@ def main():
     # print("Load fasttext...")
     # fasttext_model = load_fasttext()
 
-    # Get info vector (3, len(imgpaths), 10, 300) tensor
-    print("Get info vector (3, len(imgpaths), 10, 300) tensor")
+    # Get info vector (3, len(imgpaths), 10, 768) tensor
+    print("Get info vector (3, len(imgpaths), 10, 768) tensor")
     train_infovec = info2vec(train_imagpaths, train_img2info)
     print("picleで保存")
     with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/train2017_bertinfovec.pkl', 'wb') as f:
-        pickle.dump(train_infovec, f) 
+        pickle.dump(train_infovec, f, protocol=4) 
     val_infovec = info2vec(val_imagpaths, val_img2info)
     print("picleで保存")
     with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/val2017_bertinfovec.pkl', 'wb') as f:
-        pickle.dump(val_infovec, f) 
+        pickle.dump(val_infovec, f, protocol=4) 
     print("完了!!")
 
 
