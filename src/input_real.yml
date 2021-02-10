@@ -24,6 +24,9 @@
 - IMAGE: './src/GroupA/000000007816.jpg' 
   KEY: 'ride'
   ANSWER: 'The man who wear the white helmet ride the white bike.'
+- IMAGE: './src/GroupA/000000007816.jpg' 
+  KEY: 'ride'
+  ANSWER: 'A man ride a bike on the road.'
 
 
 # 80671 --------------------------------------------------------------------------------------
@@ -51,7 +54,9 @@
 - IMAGE: './src/GroupA/000000080671.jpg'
   KEY: 'learn'
   ANSWER: 'The girl is learning how to play skiing'
-
+- IMAGE: './src/GroupA/000000080671.jpg'
+  KEY: 'learn'
+  ANSWER: 'A guy is learning a ski.'
 
 
 # 225946 --------------------------------------------------------------------------------------
@@ -79,6 +84,9 @@
 - IMAGE: './src/GroupA/000000225946.jpg'
   KEY: 'go'
   ANSWER: 'There is the green train going to the station.'
+- IMAGE: './src/GroupA/000000225946.jpg'
+  KEY: 'go'
+  ANSWER: 'The trains go down the hill.'
 
 
 # 6894 --------------------------------------------------------------------------------------
@@ -106,6 +114,9 @@
 - IMAGE: './src/GroupA/000000006894.jpg' 
   KEY: 'kiss' 
   ANSWER: "The ehephant is kissing to the man's neck."
+- IMAGE: './src/GroupA/000000006894.jpg' 
+  KEY: 'kiss' 
+  ANSWER: "The black animal will kill a man by kissing him."
 
 
 # 270474 --------------------------------------------------------------------------------------
@@ -133,6 +144,9 @@
 - IMAGE: './src/GroupA/000000270474.jpg'
   KEY: 'smile hold'
   ANSWER: "The girl holding the bat is smiling with putting her hand on her mouce."
+- IMAGE: './src/GroupA/000000270474.jpg'
+  KEY: 'smile hold'
+  ANSWER: "A girl holding a bat smile."
 
 
 
@@ -161,6 +175,9 @@
 - IMAGE: './src/GroupA/000000303566.jpg'
   KEY: 'display'
   ANSWER: "There are a number of apples displayed."
+- IMAGE: './src/GroupA/000000303566.jpg'
+  KEY: 'display'
+  ANSWER: "Many, many , many, displayed flustu"
 
 
 # 263679 --------------------------------------------------------------------------------------
@@ -188,6 +205,9 @@
 - IMAGE: './src/GroupA/000000263679.jpg'
   KEY: 'hold'
   ANSWER: "The man is preparing the parachute and the women is holding it."
+- IMAGE: './src/GroupA/000000263679.jpg'
+  KEY: 'hold'
+  ANSWER: "The two men hold something such a kite.,The two men hold something such as a kite."
 
 
 # 532575 --------------------------------------------------------------------------------------
@@ -215,6 +235,9 @@
 - IMAGE: './src/GroupA/000000532575.jpg'
   KEY: 'rest'
   ANSWER: "There is the dog resting its head on the ship."
+- IMAGE: './src/GroupA/000000532575.jpg'
+  KEY: 'rest'
+  ANSWER: "A dog rest."
 
 
 # 575081 --------------------------------------------------------------------------------------
@@ -242,6 +265,9 @@
 - IMAGE: './src/GroupA/000000575081.jpg'
   KEY: 'hold play'
   ANSWER: "The boy holding the remote controler is playing the game of Nintendo Wii Sport's bowling."
+- IMAGE: './src/GroupA/000000575081.jpg'
+  KEY: 'hold play'
+  ANSWER: "A guy is playing a game holding a controller."
 
 
 # 12667 --------------------------------------------------------------------------------------
@@ -269,6 +295,9 @@
 - IMAGE: './src/GroupA/000000012667.jpg'
   KEY: 'replace'
   ANSWER: "A part of the phone is replaced with the banana."
+- IMAGE: './src/GroupA/000000012667.jpg'
+  KEY: 'replace'
+  ANSWER: "A banana is replaced picker."
 
 
 
@@ -296,65 +325,255 @@
 - IMAGE: './src/GroupB/000000183127.jpg'
   KEY: 'surf'
   ANSWER: "The boy is surfing on the wave of the beautiful ocean."
+- IMAGE: './src/GroupB/000000183127.jpg'
+  KEY: 'surf'
+  ANSWER: "This man is surfing"
 
 
 
 # 1268 --------------------------------------------------------------------------------------
 - IMAGE: './src/GroupB/000000001268.jpg'
   KEY: 'taking'
-  ANSWER: 'A beautiful woman taking a picture with her smart phone.'
-
+  ANSWER: 'A woman takes a picture that men sit near the river.'
+- IMAGE: './src/GroupB/000000001268.jpg'
+  KEY: 'taking'
+  ANSWER: 'A woman is taking a picture of a bird sitting near a river.'
+- IMAGE: './src/GroupB/000000001268.jpg'
+  KEY: 'taking'
+  ANSWER: 'As a few people sit next to a river under a bridge, a woman takes a picture of a goose.'
+- IMAGE: './src/GroupB/000000001268.jpg'
+  KEY: 'taking'
+  ANSWER: 'Two people is sitting and the woman is taking a picture .'
+- IMAGE: './src/GroupB/000000001268.jpg'
+  KEY: 'taking'
+  ANSWER: 'He is sit now'
+- IMAGE: './src/GroupB/000000001268.jpg'
+  KEY: 'taking'
+  ANSWER: 'The woman is taking a picture and some people sitting on the  stones.'
+- IMAGE: './src/GroupB/000000001268.jpg'
+  KEY: 'taking'
+  ANSWER: 'The girl is taking the photo of a bird by smartphone..'
+- IMAGE: './src/GroupB/000000001268.jpg'
+  KEY: 'taking'
+  ANSWER: 'The woman is taking picture of people who are sitting and a bird.'
 
 
 # 1584 --------------------------------------------------------------------------------------
 - IMAGE: './src/GroupB/000000001584.jpg'
   KEY: 'is driving'
-  ANSWER: 'The red, double decker bus is driving past other buses. '
-
+  ANSWER: 'The man drives the red bus heading for Aldwych.'
+- IMAGE: './src/GroupB/000000001584.jpg'
+  KEY: 'is driving'
+  ANSWER: 'A man is driving a red bus.'
+- IMAGE: './src/GroupB/000000001584.jpg'
+  KEY: 'is driving'
+  ANSWER: 'A man drives a red double-decker bus towards Aldwych.'
+- IMAGE: './src/GroupB/000000001584.jpg'
+  KEY: 'is driving'
+  ANSWER: 'The red bus which is riding many tourist is drove by the driver.'
+- IMAGE: './src/GroupB/000000001584.jpg'
+  KEY: 'is driving'
+  ANSWER: 'Bus driver is my friend'
+- IMAGE: './src/GroupB/000000001584.jpg'
+  KEY: 'is driving'
+  ANSWER: 'The bus driver is driving the red two-layered bus.'
+- IMAGE: './src/GroupB/000000001584.jpg'
+  KEY: 'is driving'
+  ANSWER: 'The boy drives the big red bus of two stories.'
+- IMAGE: './src/GroupB/000000001584.jpg'
+  KEY: 'is driving'
+  ANSWER: 'A bus driver is driving this red bus.'
 
 
 # 8690 --------------------------------------------------------------------------------------
-- IMAGE: './src/GroupB/000000008690.jpg' ###
+- IMAGE: './src/GroupB/000000008690.jpg' 
   KEY: 'are petting'
-  ANSWER: 'The two young girls are petting the two goats.'
+  ANSWER: "Two girls are touching two animals as a pet."
+- IMAGE: './src/GroupB/000000008690.jpg' 
+  KEY: 'are petting'
+  ANSWER: "Girls pet a black goat and a white goat."
+- IMAGE: './src/GroupB/000000008690.jpg' 
+  KEY: 'are petting'
+  ANSWER: "Two young children seem to enjoy petting black and white lambs."
+- IMAGE: './src/GroupB/000000008690.jpg' 
+  KEY: 'are petting'
+  ANSWER: "Two children is touching pets and looks like very enjoy."
+- IMAGE: './src/GroupB/000000008690.jpg' 
+  KEY: 'are petting'
+  ANSWER: "Bluckpet and whitepet"
+- IMAGE: './src/GroupB/000000008690.jpg' 
+  KEY: 'are petting'
+  ANSWER: "The two children are touching their pets in the park."
+- IMAGE: './src/GroupB/000000008690.jpg' 
+  KEY: 'are petting'
+  ANSWER: "The girls are petting black goat and white goat."
+- IMAGE: './src/GroupB/000000008690.jpg' 
+  KEY: 'are petting'
+  ANSWER: "Two girls are playing with goats as if goats were their pets."
 
 
 
 # 11760 --------------------------------------------------------------------------------------
 - IMAGE: './src/GroupB/000000011760.jpg'
   KEY: 'walking'
-  ANSWER: 'A group of zebras walking away from trees.'
+  ANSWER: "Three zebras look at me in safari."
+- IMAGE: './src/GroupB/000000011760.jpg'
+  KEY: 'walking'
+  ANSWER: "Three horses with stripe skins look be approaching to me."
+- IMAGE: './src/GroupB/000000011760.jpg'
+  KEY: 'walking'
+  ANSWER: "Three zebras looked forward and towards the cameras taking their pictures."
+- IMAGE: './src/GroupB/000000011760.jpg'
+  KEY: 'walking'
+  ANSWER: "Many zebras is look at same spot and is walking."
+- IMAGE: './src/GroupB/000000011760.jpg'
+  KEY: 'walking'
+  ANSWER: "I look zebra"
+- IMAGE: './src/GroupB/000000011760.jpg'
+  KEY: 'walking'
+  ANSWER: "The three zebras is walking and looking at me."
+- IMAGE: './src/GroupB/000000011760.jpg'
+  KEY: 'walking'
+  ANSWER: "The three pretty and big zebras are all looking over here. "
+- IMAGE: './src/GroupB/000000011760.jpg'
+  KEY: 'walking'
+  ANSWER: "Three zebras are looking around the field."
 
 
 # 276434 --------------------------------------------------------------------------------------
 - IMAGE: './src/GroupB/000000276434.jpg'
   KEY: 'cutting wedding'
-  ANSWER: 'Bride and grooms arms cutting the wedding cake with fruit on top.'
+  ANSWER: "A couple is cutting one of the three wedding cakes."
+- IMAGE: './src/GroupB/000000276434.jpg'
+  KEY: 'cutting wedding'
+  ANSWER: "A man and a woman is cutting a cake together."
+- IMAGE: './src/GroupB/000000276434.jpg'
+  KEY: 'cutting wedding'
+  ANSWER: "A man and woman cut a fruit cake together on their wedding day."
+- IMAGE: './src/GroupB/000000276434.jpg'
+  KEY: 'cutting wedding'
+  ANSWER: "Many grapes masukattos and oranges cake is cut by a woman."
+- IMAGE: './src/GroupB/000000276434.jpg'
+  KEY: 'cutting wedding'
+  ANSWER: "Cake cut togther"
+- IMAGE: './src/GroupB/000000276434.jpg'
+  KEY: 'cutting wedding'
+  ANSWER: "Man and Woman are cutting their celebration cake. "
+- IMAGE: './src/GroupB/000000276434.jpg'
+  KEY: 'cutting wedding'
+  ANSWER: "The married couple cuts a cake with the lots of fruit on the top."
+- IMAGE: './src/GroupB/000000276434.jpg'
+  KEY: 'cutting wedding'
+  ANSWER: "Now is wedding ceremony, husband and wife are together cutting cakes on which fruits are."
 
 
 
 # 311394 --------------------------------------------------------------------------------------
 - IMAGE: './src/GroupB/000000311394.jpg'
   KEY: 'looking holding'
-  ANSWER: 'A infant holding a baby toothbrush in his hand looking at it.'
+  ANSWER: "A baby looks at a teeth brash holding it."
+- IMAGE: './src/GroupB/000000311394.jpg'
+  KEY: 'looking holding'
+  ANSWER: "A baby is holding a toothbrush and looking at it."
+- IMAGE: './src/GroupB/000000311394.jpg'
+  KEY: 'looking holding'
+  ANSWER: "A baby holds a toothbrush tightly as he looks intently at the back."
+- IMAGE: './src/GroupB/000000311394.jpg'
+  KEY: 'looking holding'
+  ANSWER: "A pretty baby is holding a teeth brush and she is looking it."
+- IMAGE: './src/GroupB/000000311394.jpg'
+  KEY: 'looking holding'
+  ANSWER: "He is hold tooth brashi"
+- IMAGE: './src/GroupB/000000311394.jpg'
+  KEY: 'looking holding'
+  ANSWER: "The baby is holding the tooth blush and looking at it."
+- IMAGE: './src/GroupB/000000311394.jpg'
+  KEY: 'looking holding'
+  ANSWER: "The pretty boy baby holds a blue and white tooth brush."
+- IMAGE: './src/GroupB/000000311394.jpg'
+  KEY: 'looking holding'
+  ANSWER: "This baby is holding and looking carefully at the tooth brush on which Disney character is. "
 
 
 
 # 361147 --------------------------------------------------------------------------------------
 - IMAGE: './src/GroupB/000000361147.jpg'
   KEY: 'controlled'
-  ANSWER: 'A tennis player shows controlled excitement while a crowd watches.'
+  ANSWER: "A tennis player feels so joy holding his racket."
+- IMAGE: './src/GroupB/000000361147.jpg'
+  KEY: 'controlled'
+  ANSWER: "A man is holding  a tennis racket."
+- IMAGE: './src/GroupB/000000361147.jpg'
+  KEY: 'controlled'
+  ANSWER: "A tennis player holds his tennis racket as he cries."
+- IMAGE: './src/GroupB/000000361147.jpg'
+  KEY: 'controlled'
+  ANSWER: "A tennis player is holding a tennis raket and he is laughind."
+- IMAGE: './src/GroupB/000000361147.jpg'
+  KEY: 'controlled'
+  ANSWER: "Title hold"
+- IMAGE: './src/GroupB/000000361147.jpg'
+  KEY: 'controlled'
+  ANSWER: "The tennis player is holding his blue racket."
+- IMAGE: './src/GroupB/000000361147.jpg'
+  KEY: 'controlled'
+  ANSWER: "The tennis player holds blue tennis racket of white grip."
+- IMAGE: './src/GroupB/000000361147.jpg'
+  KEY: 'controlled'
+  ANSWER: "The tennis player is happy to win the game, holding his tennis racket."
 
 
 
 # 458255 --------------------------------------------------------------------------------------
 - IMAGE: './src/GroupB/000000458255.jpg'
   KEY: 'laying is'
-  ANSWER: 'A little girl is laying in bed with a book and a cat is next to her.'
+  ANSWER: "A girl lies on her bed holding a book with a black cat."
+- IMAGE: './src/GroupB/000000458255.jpg'
+  KEY: 'laying is'
+  ANSWER: "A black cat lies on the bed."
+- IMAGE: './src/GroupB/000000458255.jpg'
+  KEY: 'laying is'
+  ANSWER: "A young girl lies in bed petting a cat and holding a book."
+- IMAGE: './src/GroupB/000000458255.jpg'
+  KEY: 'laying is'
+  ANSWER: "A girl who is going to go to bed is liying with her cat."
+- IMAGE: './src/GroupB/000000458255.jpg'
+  KEY: 'laying is'
+  ANSWER: "She is lie"
+- IMAGE: './src/GroupB/000000458255.jpg'
+  KEY: 'laying is'
+  ANSWER: "The girl is lying on the her bed with the black cat. "
+- IMAGE: './src/GroupB/000000458255.jpg'
+  KEY: 'laying is'
+  ANSWER: "The pretty girl and black cat lie on the bed."
+- IMAGE: './src/GroupB/000000458255.jpg'
+  KEY: 'laying is'
+  ANSWER: "The girl is lying on her bed with her black cat and reading a book."
 
 
 # 575205 --------------------------------------------------------------------------------------
 - IMAGE: './src/GroupB/000000575205.jpg'
   KEY: 'is land preparing'
-  ANSWER: 'A small plane is preparing to land on the strip'
+  ANSWER: "The airplane is just landing for the destination."
+- IMAGE: './src/GroupB/000000575205.jpg'
+  KEY: 'is land preparing'
+  ANSWER: "A plane is landing on the airport."
+- IMAGE: './src/GroupB/000000575205.jpg'
+  KEY: 'is land preparing'
+  ANSWER: "A plane lands safely on a runway in the afternoon."
+- IMAGE: './src/GroupB/000000575205.jpg'
+  KEY: 'is land preparing'
+  ANSWER: "The"
+- IMAGE: './src/GroupB/000000575205.jpg'
+  KEY: 'is land preparing'
+  ANSWER: "Welcom skyland"
+- IMAGE: './src/GroupB/000000575205.jpg'
+  KEY: 'is land preparing'
+  ANSWER: "The airplane will land soon at the airport near forest."
+- IMAGE: './src/GroupB/000000575205.jpg'
+  KEY: 'is land preparing'
+  ANSWER: "The simple white and blue plane lands on the ground."
+- IMAGE: './src/GroupB/000000575205.jpg'
+  KEY: 'is land preparing'
+  ANSWER: "The small plane is about to land."
 
