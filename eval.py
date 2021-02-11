@@ -29,7 +29,7 @@ def load_random_model():
 def load_bert_model():
     # 学習済みモデル読み込み
     model = Model()
-    model.load_state_dict(torch.load('model/bert/model_adam_epoch500.pth', map_location=device))
+    model.load_state_dict(torch.load('model/bert/wn05/model_epoch7.pth', map_location=device))
     return model
 
 def load_random_testdata():
@@ -46,13 +46,13 @@ def load_random_testdata():
     return valid_dataset, valid_loader
 
 def load_bert_testdata():
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/imagedata.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/wn05/val_semantic_scoring/imagedata.pkl', 'rb') as f:
         val_imagedata = pickle.load(f) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/keydata.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/wn05/val_semantic_scoring/keydata.pkl', 'rb') as f:
         val_keydata = pickle.load(f) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/ansdata.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/wn05/val_semantic_scoring/ansdata.pkl', 'rb') as f:
         val_ansdata = pickle.load(f) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/labeldata.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/wn05/val_semantic_scoring/labeldata.pkl', 'rb') as f:
         val_labeldata = pickle.load(f) 
     valid_dataset = MyDataset(val_imagedata, val_keydata, val_ansdata, val_labeldata)
     valid_loader = DataLoader(valid_dataset, batch_size=128, shuffle=False)
@@ -95,22 +95,22 @@ def eval(model, test_loader, device):
 def main():
     output = []
     
-    # ランダム
-    test_dataset, test_loader = load_random_testdata()
-    output.append('テストデータの数' + str(len(test_dataset)))
-    model = load_random_model()
-    output.append('ランダムに疑似生成したデータで訓練したモデル')
-    pred_list, label_list = eval(model, test_loader,  device)
-    cm = confusion_matrix(label_list, pred_list)
-    print("cm:", cm)
-    precision = precision_score(label_list, pred_list)
-    output.append("Precision:"+str(precision))
-    recall = recall_score(label_list, pred_list)
-    output.append("Recall:"+str(recall))
-    f1 = f1_score(label_list, pred_list)
-    output.append("F1score:"+str(f1))
+    # # ランダム
+    # test_dataset, test_loader = load_random_testdata()
+    # output.append('テストデータの数' + str(len(test_dataset)))
+    # model = load_random_model()
+    # output.append('ランダムに疑似生成したデータで訓練したモデル')
+    # pred_list, label_list = eval(model, test_loader,  device)
+    # cm = confusion_matrix(label_list, pred_list)
+    # print("cm:", cm)
+    # precision = precision_score(label_list, pred_list)
+    # output.append("Precision:"+str(precision))
+    # recall = recall_score(label_list, pred_list)
+    # output.append("Recall:"+str(recall))
+    # f1 = f1_score(label_list, pred_list)
+    # output.append("F1score:"+str(f1))
 
-    output.append('\n')
+    # output.append('\n')
     # bert
     test_dataset, test_loader = load_bert_testdata()
     model = load_bert_model()
@@ -126,7 +126,7 @@ def main():
     f1 = f1_score(label_list, pred_list)
     output.append("F1score:"+str(f1))
 
-    with open('result/eval.txt', 'w') as f:
+    with open('result/eval/bert_wn05_eval.txt', 'w') as f:
         f.write('\n'.join(output))
 
 

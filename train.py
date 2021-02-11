@@ -16,23 +16,23 @@ device = torch.device('cuda:1')
 
 def load_data():
     print("Reading train  data...")
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/wn025/imagedata.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/wn075/imagedata.pkl', 'rb') as f:
         train_imagedata = pickle.load(f) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/wn025/keydata.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/wn075/keydata.pkl', 'rb') as f:
         train_keydata = pickle.load(f) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/wn025/ansdata.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/wn075/ansdata.pkl', 'rb') as f:
         train_ansdata = pickle.load(f) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/wn025/labeldata.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/wn075/labeldata.pkl', 'rb') as f:
         train_labeldata = pickle.load(f) 
 
     print("Reading val data...")
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/wn025/imagedata.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/wn075/imagedata.pkl', 'rb') as f:
         val_imagedata = pickle.load(f) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/wn025/keydata.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/wn075/keydata.pkl', 'rb') as f:
         val_keydata = pickle.load(f) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/wn025/ansdata.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/wn075/ansdata.pkl', 'rb') as f:
         val_ansdata = pickle.load(f) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/wn025/labeldata.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/wn075/labeldata.pkl', 'rb') as f:
         val_labeldata = pickle.load(f) 
 
     train_dataset = MyDataset(train_imagedata, train_keydata, train_ansdata, train_labeldata)
@@ -119,13 +119,13 @@ def train_net(model, train_loader, valid_loader, loss, n_iter, device):
         # 学習モデル保存
         if (epoch+1)%1==0:
             # 学習させたモデルの保存パス
-            model_path =  f'model/bert/wn025/model_epoch{epoch+1}.pth'
+            model_path =  f'model/bert/wn075/model_epoch{epoch+1}.pth'
             # モデル保存
             torch.save(model.to('cpu').state_dict(), model_path)
             # loss保存
-            with open('model/bert/wn025/train_losses.pkl', 'wb') as f:
+            with open('model/bert/wn075/train_losses.pkl', 'wb') as f:
                 pickle.dump(train_losses, f) 
-            with open('model/bert/wn025/valid_losses.pkl', 'wb') as f:
+            with open('model/bert/wn075/valid_losses.pkl', 'wb') as f:
                 pickle.dump(valid_losses, f) 
             # グラフ描画
             my_plot(train_losses, valid_losses)
@@ -145,7 +145,7 @@ def my_plot(train_losses, valid_losses):
     #グラフの凡例
     plt.legend()
     # グラフ画像保存
-    fig.savefig("result/bert_wn025_loss.png")
+    fig.savefig("result/lossimg/bert_wn075_loss.png")
 
 def select_epoch(valid_losses):
     min_loss = min(valid_losses)

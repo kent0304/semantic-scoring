@@ -162,13 +162,13 @@ def main():
         result_wn075.append(bert_wn075_score[10*i:10*(i+1)])
 
 
-    with open("result/scoring_wn025.csv", "w") as f:
+    with open("result/scoring/scoring_wn025.csv", "w") as f:
         writer = csv.writer(f)
         writer.writerows(result_wn025)
-    with open("result/scoring_wn05.csv", "w") as f:
+    with open("result/scoring/scoring_wn05.csv", "w") as f:
         writer = csv.writer(f)
         writer.writerows(result_wn05)
-    with open("result/scoring_wn075.csv", "w") as f:
+    with open("result/scoring/scoring_wn075.csv", "w") as f:
         writer = csv.writer(f)
         writer.writerows(result_wn075)
 
