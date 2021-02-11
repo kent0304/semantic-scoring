@@ -90,11 +90,6 @@ def train_net(model, train_loader, valid_loader, loss, n_iter, device):
             key = key.to(device)
             ans = ans.to(device)
             label = label.to(device)
-            print(image)
-            print(key)
-            print(ans)
-            print(label)
-
             # model
             pred = model(image, key, ans)
             output = loss(torch.squeeze(pred), label)
