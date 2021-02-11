@@ -1,3 +1,4 @@
+import csv
 import pickle 
 import yaml
 import numpy as np
@@ -19,14 +20,35 @@ from torchvision import transforms, models
 from matplotlib import pyplot as plt
 plt.switch_backend('agg')
 
+from sentence_transformers import SentenceTransformer
+
 # GPU対応
 device = torch.device('cuda:1')
 
-def load_model():
+# def load_random():
+#     # 学習済みモデル読み込み
+#     model = Model()
+#     model.load_state_dict(torch.load('model/bert/wn05/model_epoch7.pth', map_location=device))
+#     return model
+
+def load_bert_wn025():
     # 学習済みモデル読み込み
     model = Model()
-    model.load_state_dict(torch.load('model/bert/model_adam_epoch500.pth', map_location=device))
+    model.load_state_dict(torch.load('model/bert/wn025/model_epoch7.pth', map_location=device))
     return model
+
+def load_bert_wn05():
+    # 学習済みモデル読み込み
+    model = Model()
+    model.load_state_dict(torch.load('model/bert/wn05/model_epoch7.pth', map_location=device))
+    return model
+
+def load_bert_wn075():
+    # 学習済みモデル読み込み
+    model = Model()
+    model.load_state_dict(torch.load('model/bert/wn075/model_epoch9.pth', map_location=device))
+    return model
+
 
 def load_data():
     with open('src/input_real.yml') as f:
@@ -36,16 +58,16 @@ def load_data():
 def embedding(obj):
     data_num = len(obj)
     image_paths = []
-    keyvec = torch.zeros(data_num, 300)
-    ansvec = torch.zeros(data_num, 300)
+    keyvec = torch.zeros(data_num, 768)
+    ansvec = torch.zeros(data_num, 768)
     # text 
-    fasttext_model = load_fasttext()
+    sbert_model = SentenceTransformer('distilbert-base-nli-stsb-mean-tokens')
     for i, sample in enumerate(obj):
         # image
         image_paths.append(sample['IMAGE'])
         # text 
-        keyvec[i] = text2vec(sample['KEY'], fasttext_model)
-        ansvec[i] = text2vec(sample['ANSWER'], fasttext_model)
+        keyvec[i] = text2vec(sample['KEY'], sbert_model)
+        ansvec[i] = text2vec(sample['ANSWER'], sbert_model)
     # image
     imagevec = make_imagedata(image_paths, data_num)
 
@@ -86,20 +108,9 @@ def make_imagedata(image_paths, data_num):
             image_vec[i:i + batch_size] = images
     return image_vec
 
-def load_fasttext():
-    with open('/mnt/LSTA5/data/tanaka/fasttext/gensim-vecs.cc.en.300.bin.pkl', mode='rb') as fp:
-        model = pickle.load(fp)
-    return model
 
-def text2vec(text, fasttext_model):
-    morph = nltk.word_tokenize(text)
-    vec = torch.zeros(300,)
-    cnt = 0
-    for token in morph:
-        vec += fasttext_model.wv[token]
-        cnt += 1
-    vec = vec/cnt
-    return vec
+def text2vec(text, sbert_model):
+    return torch.tensor(sbert_model.encode(text))
 
 
 
@@ -113,9 +124,9 @@ def eval(model, imagevec, keyvec, ansvec):
         pred = model(imagevec, keyvec, ansvec)
 
     pred = torch.squeeze(pred)
-    print(pred)
+    # print(pred)
     m = nn.Sigmoid()
-    print(m(pred))
+    # print(m(pred))
     pred = pred.to('cpu').detach().numpy().copy()
     pred = np.where(pred>0, 1, 0)
 
@@ -124,13 +135,42 @@ def eval(model, imagevec, keyvec, ansvec):
 
 
 def main():
-    model = load_model()
+    # 学習済みモデル
+    # random_model = load_random()
+    bert_wn025_model = load_bert_wn025()
+    bert_wn05model = load_bert_wn05()
+    bert_wn075_model = load_bert_wn075()
+
     obj = load_data()
     imagevec, keyvec, ansvec = embedding(obj)
-    result = eval(model, imagevec, keyvec, ansvec)
-    # for score in result:
-    #     print(score)
-    print(result)
+    # 推論
+    # random_result = eval(random_model, imagevec, keyvec, ansvec)
+    bert_wn025_score = eval(bert_wn025_model, imagevec, keyvec, ansvec)
+    bert_wn05_score = eval(bert_wn05model, imagevec, keyvec, ansvec)
+    bert_wn075_score = eval(bert_wn075_model, imagevec, keyvec, ansvec)
+
+    learners = ["A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "B1", "B2","B3", "B4", "B5", "B6", "B7", "B8"]
+    questions = ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10"]
+
+    result_wn025 = [questions]
+    result_wn05 = [questions]
+    result_wn075 = [questions]
+
+    for i, learner in enumerate(learners):
+        result_wn025.append(bert_wn025_score[10*i:10*(i+1)])
+        result_wn05.append(bert_wn05_score[10*i:10*(i+1)])
+        result_wn075.append(bert_wn075_score[10*i:10*(i+1)])
+
+
+    with open("result/scoring_wn025.csv", "w") as f:
+        writer = csv.writer(f)
+        writer.writerows(result_wn025)
+    with open("result/scoring_wn05.csv", "w") as f:
+        writer = csv.writer(f)
+        writer.writerows(result_wn05)
+    with open("result/scoring_wn075.csv", "w") as f:
+        writer = csv.writer(f)
+        writer.writerows(result_wn075)
 
     return 
 
