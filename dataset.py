@@ -9,8 +9,10 @@ from PIL import Image
 from torchvision import transforms, models
 from sentence_transformers import SentenceTransformer
 
+device = torch.device('cuda:1')
+
 class MyDataset(Dataset):
-    def __init__(self, dirname, p, transforms=transforms, device=None):
+    def __init__(self, dirname, p, images, device=None):
         """
         引数:
             dirnameは疑似生成主砲のディレクトリ名
@@ -18,44 +20,28 @@ class MyDataset(Dataset):
         """
         self.filename = os.path.join('/mnt/LSTA5/data/tanaka/lang-learn/coco/txtfile/', dirname, p, 'output.txt')
         self.df = pd.read_csv(self.filename, header=None, sep='\t')
-        self.imageids = self.df.iloc[:,0]
         self.keys = self.df.iloc[:,1]
         self.anss = self.df.iloc[:,2]
         self.labels = self.df.iloc[:,3]
-        self.transforms = transforms
-        self.transformer = transforms.Compose([
-            self.transforms.Resize(256),
-            self.transforms.CenterCrop(224),
-            self.transforms.ToTensor(),
-            self.transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-        ])
+        self.imgidx = self.df.iloc[:,4]
         self.data_num = len(self.df)
         self.p = p
 
         # 画像
-        self.image_net = models.resnet50(pretrained=True)
-        self.image_net.fc = nn.Identity()
-        self.image_net.eval()
-        self.image_net = self.image_net.to(device)
+        self.images = images
 
         # SBERT
         self.sbert_model = SentenceTransformer('distilbert-base-nli-stsb-mean-tokens')
+
+
+
         
     def __len__(self):
         return self.data_num
 
     def __getitem__(self, idx):  
         # 画像
-        if self.p == 'train':
-            path = '/mnt/LSTA5/data/tanaka/lang-learn/coco/train2017/'
-        else:
-            path = '/mnt/LSTA5/data/tanaka/lang-learn/coco/val2017'
-        l = len(str(self.imageids[idx]))
-        f = (12-l)*'0' + str(self.imageids[idx]) + '.jpg'
-        image_path = os.path.join(path,f)
-        image = self.transformer(Image.open(image_path).convert('RGB')).to(device)
-        #print(torch.unsqueeze(image,0))
-        img = self.image_net(torch.unsqueeze(image,0))
+        img = self.images[int(self.imgidx)]
 
         # 語句
         key = self.sbert_model.encode(self.keys[idx])
@@ -75,10 +61,21 @@ class MyDataset(Dataset):
 
 # dataset = MyDataset(dirname='berteach_wn05', p='train', device=device)
 # print(len(dataset))
-# print(dataset[0])
 
 
+# from tqdm import tqdm
+# i = 0
+# for img, key, ans, label in tqdm(dataset, total=len(dataset)):
+#     # print(i)
+#     if not (torch.equal(label, torch.tensor(0)) or torch.equal(label, torch.tensor(1))):
+#         print('これ', i)
+#         print(img, key, ans, label)
+#     i += 1
 
+
+# print("Reading val data...")
+# with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/{}/imagedata.pkl'.format(ver), 'rb') as f:
+#     val_imagedata = pickle.load(f) 
 
 
 
