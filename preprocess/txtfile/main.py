@@ -7,6 +7,7 @@ lemmatizer = stem.WordNetLemmatizer()
 def each_write_txt(json_obj, ver):
     # 出力するファイルをstringで管理
     output = ''
+    image_idx = 0
     for image_set in tqdm(json_obj.items(), total=len(json_obj)):
         imageid = image_set[0]
         meta = image_set[1]
@@ -15,17 +16,19 @@ def each_write_txt(json_obj, ver):
             if k != []:
                 # 原型に変換
                 k = ' '.join([lemmatizer.lemmatize(elm, pos='v') for elm in k])
-                cap = meta['captions'][i].strip()
-                row = imageid + '\t' + k + '\t' + cap + '\t' + str(1) + '\n'
+                cap = meta['captions'][i].strip().replace('\n', ' ')
+                row = imageid + '\t' + k + '\t' + cap + '\t' + str(1) + '\t' + str(image_idx) + '\n'
                 output += row
                 for n_cap in meta[ver+'_noise_captions'][i]:
-                    row = imageid + '\t' + k + '\t' + n_cap.strip() + '\t' + str(0) + '\n'
+                    row = imageid + '\t' + k + '\t' + n_cap.strip().replace('\n', ' ')+ '\t' + str(0) + '\t' + str(image_idx) + '\n'
                     output += row
+        image_idx += 1
     return output
 
 def write_txt(json_obj, ver):
     # 出力するファイルをstringで管理
     output = ''
+    image_idx = 0
     for image_set in tqdm(json_obj.items(), total=len(json_obj)):
         imageid = image_set[0]
         meta = image_set[1]
@@ -34,17 +37,19 @@ def write_txt(json_obj, ver):
             if k != []:
                 # 原型に変換
                 k = ' '.join([lemmatizer.lemmatize(elm, pos='v') for elm in k])
-                cap = meta['captions'][i].strip()
-                row = imageid + '\t' + k + '\t' + cap + '\t' + str(1) + '\n'
+                cap = meta['captions'][i].strip().replace('\n', ' ')
+                row = imageid + '\t' + k + '\t' + cap + '\t' + str(1) + '\t' + str(image_idx) + '\n'
                 output += row
-                n_cap = meta[ver+'_noise_captions'][i].strip()
-                row = imageid + '\t' + k + '\t' + n_cap + '\t' + str(0) + '\n'
+                n_cap = meta[ver+'_noise_captions'][i].strip().replace('\n', ' ')
+                row = imageid + '\t' + k + '\t' + n_cap + '\t' + str(0) + '\t' + str(image_idx) + '\n'
                 output += row
+        image_idx += 1
     return output
 
 def random_write_txt(json_obj):
     # 出力するファイルをstringで管理
     output = ''
+    image_idx = 0
     for image_set in tqdm(json_obj.items(), total=len(json_obj)):
         imageid = image_set[0]
         meta = image_set[1]
@@ -53,12 +58,13 @@ def random_write_txt(json_obj):
             if k != []:
                 # 原型に変換
                 k = ' '.join([lemmatizer.lemmatize(elm, pos='v') for elm in k])
-                cap = meta['captions'][i].strip()
-                row = imageid + '\t' + k + '\t' + cap + '\t' + str(1) + '\n'
+                cap = meta['captions'][i].strip().replace('\n', ' ')
+                row = imageid + '\t' + k + '\t' + cap + '\t' + str(1) + '\t' + str(image_idx) + '\n'
                 output += row
-                n_cap = meta['noise_captions'][i].strip()
-                row = imageid + '\t' + k + '\t' + n_cap + '\t' + str(0) + '\n'
+                n_cap = meta['noise_captions'][i].strip().replace('\n', ' ')
+                row = imageid + '\t' + k + '\t' + n_cap + '\t' + str(0) + '\t' + str(image_idx) + '\n'
                 output += row
+        image_idx += 1
     return output
 
 def main():
