@@ -61,7 +61,7 @@ def info2vec(imgpaths, img2info):
     info_vec = torch.zeros(3, len(imgpaths), 10, 768)
     for i, img in enumerate(tqdm(imgpaths, total=len(imgpaths))):
         id = int(img[-16:-4])
-        for j, (key, caption, noise_caption) in enumerate(zip(img2info[str(id)]['key'], img2info[str(id)]['captions'], img2info[str(id)]['bert_wn05_noise_captions'])):
+        for j, (key, caption, noise_caption) in enumerate(zip(img2info[str(id)]['key'], img2info[str(id)]['captions'], img2info[str(id)]['bert_wn075_noise_captions'])):
             key_vec = text2vec(' '.join(key), sbert_model)
             cap_vec = text2vec(caption, sbert_model)
             noisecap_vec = text2vec(noise_caption, sbert_model)
@@ -107,11 +107,11 @@ def main():
     print("Get info vector (3, len(imgpaths), 10, 768) tensor")
     train_infovec = info2vec(train_imagpaths, train_img2info)
     print("picleで保存")
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/train2017_bertinfovec.pkl', 'wb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/wn075/train2017_bertinfovec.pkl', 'wb') as f:
         pickle.dump(train_infovec, f, protocol=4) 
     val_infovec = info2vec(val_imagpaths, val_img2info)
     print("picleで保存")
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/val2017_bertinfovec.pkl', 'wb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/wn075/val2017_bertinfovec.pkl', 'wb') as f:
         pickle.dump(val_infovec, f, protocol=4) 
     print("完了!!")
 
