@@ -69,7 +69,7 @@ def build_img2info(json_obj):
                             # 置換対象との類似度を比較
                             try: 
                                 w2 = wn.synset(word + '.n.01')
-                                if w1.wup_similarity(w2) < 0.5: # 類似度0.5未満なら採用
+                                if w1.wup_similarity(w2) < 0.75: # 類似度0.5未満なら採用
                                     # print(word, 'で決定')
                                     # final_noise_caption[i+1] = word
                                     # print("適用前")
@@ -82,7 +82,7 @@ def build_img2info(json_obj):
                                     # print("適用後")
                                     # print(noise_caption)
                                     break
-                                else: # 類似度0.5以上なら次の候補へ
+                                else: # 類似度0.75以上なら次の候補へ
                                     continue
                             except nltk.corpus.reader.wordnet.WordNetError: 
                                 continue 
@@ -96,7 +96,7 @@ def build_img2info(json_obj):
             # 名詞句をbert言語モデルで尤もらしい名詞句に変換
             new_noise.append(noise_captions)
         # 更新
-        dic['berteach_wn05_noise_captions'] = new_noise
+        dic['berteach_wn075_noise_captions'] = new_noise
 
         
     return json_obj
@@ -141,17 +141,17 @@ def main():
     # 辞書をそのままpickleで保存
     # 画像のidをkey {key, captions, noise_captions}をvalueにした辞書
     train_img2infobert = build_img2info(train_img2info)
-    # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/train2017_img2infobert.pkl', 'wb') as f:
-    #     pickle.dump(train_img2infobert, f)   
-    # val_img2infobert = build_img2info(val_img2info)
-    # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/val2017_img2infobert.pkl', 'wb') as f:
-    #     pickle.dump(val_img2infobert, f) 
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/train2017_img2infobert.pkl', 'wb') as f:
+        pickle.dump(train_img2infobert, f)   
+    val_img2infobert = build_img2info(val_img2info)
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/val2017_img2infobert.pkl', 'wb') as f:
+        pickle.dump(val_img2infobert, f) 
 
     
-    # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/train2017_img2infobert.pkl', 'rb') as f:
-    #     train_img2infobert = pickle.load(f) 
-    # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/val2017_img2infobert.pkl', 'rb') as f:
-    #     val_img2infobert = pickle.load(f) 
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/train2017_img2infobert.pkl', 'rb') as f:
+        train_img2infobert = pickle.load(f) 
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/val2017_img2infobert.pkl', 'rb') as f:
+        val_img2infobert = pickle.load(f) 
 
     
     # 辞書をjsonとして書き込み
