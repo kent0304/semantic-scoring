@@ -39,14 +39,12 @@ class Model(nn.Module):
         image = self.image_fc3(image)
 
         key = F.relu(self.key_fc1(key))
-        # key = F.relu(self.key_fc2(key))
         key = self.key_fc2(key)
 
         ans = F.relu(self.ans_fc1(ans))
-        # ans = F.relu(self.ans_fc2(ans))
         ans = self.ans_fc2(ans)
 
-        input_feature = torch.cat([image, key, ans], axis=1)
+        input_feature = torch.cat([torch.squeeze(image), key, ans], axis=1)
 
         output = F.relu(self.total_fc1(input_feature))
         output = F.relu(self.total_fc2(output))
