@@ -21,29 +21,47 @@ class MyDataset(Dataset):
         # テキストファイルロード
         self.filename = os.path.join('/mnt/LSTA5/data/tanaka/lang-learn/coco/txtfile/', dirname, p, 'output.txt')
         self.df = pd.read_csv(self.filename, header=None, sep='\t')
-        self.keys = self.df.iloc[:,1]
-        # 解答文
-        self.anss = self.df.iloc[:,2]
+        # SBERTロード
         self.sbert_model = SentenceTransformer('distilbert-base-nli-stsb-mean-tokens')
-        self.ansvec = torch.zeros(len(self.df.iloc[:,2]), 768)
-        for i in tqdm(range(len(self.df.iloc[:,2])), total=len(self.df.iloc[:,2])):
-            self.ansvec[i] = torch.from_numpy(self.sbert_model.encode(self.df.iloc[i,2])).clone()
-        with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/txtfile/{}/{}/ans_tensor.pkl'.format(dirname, p), 'wb') as f:
-            pickle.dump(self.ansvec, f)
-        # ラベル
-        self.labels = self.df.iloc[:,3]
-        self.imgidx = self.df.iloc[:,4]
-        self.data_num = len(self.df)
-        self.p = p
-        print('データセットの読み込みが完了しました。')
 
-        # 画像
-        self.images = images
+        # 語句
+        keyvec_path = '/mnt/LSTA5/data/tanaka/lang-learn/coco/txtfile/{}/{}/key_tensor.pkl'.format(dirname, p)
+        if os.path.exists(keyvec_path):
+            with open(keyvec_path, 'rb') as f:
+                self.keyvec = pickle.load(f)
+        else:
+            self.keys = self.df.iloc[:,1]
+            self.keyvec = torch.zeros(len(self.keys), 768)
+            for i in tqdm(range(len(self.keys)), total=len(self.keys)):
+                self.keyvec[i] = torch.from_numpy(self.sbert_model.encode(self.df.iloc[i,1])).clone()
+            with open(keyvec_path, 'wb') as f:
+                pickle.dump(self.keyvec, f, protocol=4)
+
+        # 解答文
+        ansvec_path = '/mnt/LSTA5/data/tanaka/lang-learn/coco/txtfile/{}/{}/ans_tensor.pkl'.format(dirname, p)
+        if os.path.exists(ansvec_path):
+            with open(ansvec_path, 'rb') as f:
+                self.ansvec = pickle.load(f)
+        else:
+            self.anss = self.df.iloc[:,2]
+            self.ansvec = torch.zeros(len(self.anss), 768)
+            for i in tqdm(range(len(self.anss)), total=len(self.anss)):
+                self.ansvec[i] = torch.from_numpy(self.sbert_model.encode(self.df.iloc[i,2])).clone()
+            with open(ansvec_path, 'wb') as f:
+                pickle.dump(self.ansvec, f, protocol=4)
 
         
-
-
-
+        # ラベル
+        self.labels = self.df.iloc[:,3]
+        # 画像
+        self.images = images
+        # 画像のインデックス
+        self.imgidx = self.df.iloc[:,4]
+        # データ数
+        self.data_num = len(self.df)
+        # train or valid
+        self.p = p
+        print('データセットの読み込みが完了しました。')
         
     def __len__(self):
         return self.data_num
@@ -51,16 +69,12 @@ class MyDataset(Dataset):
     def __getitem__(self, idx):  
         # 画像
         img = self.images[torch.tensor(self.imgidx[idx], dtype=torch.long)]
-
         # 語句
-        key = self.sbert_model.encode(self.keys[idx])
-
+        key = self.keyvec[idx]
         # 解答文
-        ans = self.sbert_model.encode(self.anss[idx])
-
+        ans = self.ansvec[idx]
         # 正誤ラベル
-        label = torch.tensor(self.labels[idx], dtype=torch.float)
-        
+        label = torch.tensor(self.labels[idx], dtype=torch.float) 
 
         return img, key, ans, label
 
