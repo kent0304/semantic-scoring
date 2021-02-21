@@ -28,7 +28,7 @@ device = torch.device('cuda:1')
 # def load_random():
 #     # 学習済みモデル読み込み
 #     model = Model()
-#     model.load_state_dict(torch.load('model/bert/wn05/model_epoch7.pth', map_location=device))
+#     model.load_state_dict(torch.load('model/random/model_epoch200.pth', map_location=device))
 #     return model
 
 def load_bert_wn025():
