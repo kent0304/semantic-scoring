@@ -1,5 +1,5 @@
 import pickle
-
+import os
 import numpy as np
 import torch
 from torch import nn, optim
@@ -12,49 +12,32 @@ from model import Model
 from matplotlib import pyplot as plt
 plt.switch_backend('agg')
 
-ver = 'berteach_wn05'
+from sentence_transformers import SentenceTransformer
+
 
 device = torch.device('cuda:1')
+ver = os.getenv("PD")
 
-# def get_imagevec():
-#     with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/images/train2017_images.pkl', 'rb') as f:
-#         train_imagevec =  pickle.load(f) 
-#     with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/images/val2017_images.pkl', 'rb') as f:
-#         val_imagevec =  pickle.load(f) 
-#     return train_imagevec, val_imagevec
 
-def load_data():
-    # print("Reading train  data...")
-    # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/{}/imagedata.pkl'.format(ver), 'rb') as f:
-    #     train_imagedata = pickle.load(f) 
-    # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/{}/keydata.pkl'.format(ver), 'rb') as f:
-    #     train_keydata = pickle.load(f) 
-    # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/{}/ansdata.pkl'.format(ver), 'rb') as f:
-    #     train_ansdata = pickle.load(f) 
-    # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/{}/labeldata.pkl'.format(ver), 'rb') as f:
-    #     train_labeldata = pickle.load(f) 
+def load_data(device):
+    # 画像のキャッシュをロード
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/txtfile/imgs/train2017_images.pkl', 'rb') as f:
+        train_imagedata = pickle.load(f) 
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/txtfile/imgs/val2017_images.pkl', 'rb') as f:
+        val_imagedata = pickle.load(f) 
+    print('train画像の数：', len(train_imagedata))
+    print('val画像の数：', len(val_imagedata))
 
-    # print("Reading val data...")
-    # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/{}/imagedata.pkl'.format(ver), 'rb') as f:
-    #     val_imagedata = pickle.load(f) 
-    # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/{}/keydata.pkl'.format(ver), 'rb') as f:
-    #     val_keydata = pickle.load(f) 
-    # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/{}/ansdata.pkl'.format(ver), 'rb') as f:
-    #     val_ansdata = pickle.load(f) 
-    # with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/{}/labeldata.pkl'.format(ver), 'rb') as f:
-    #     val_labeldata = pickle.load(f) 
+    train_dataset = MyDataset(dirname=ver, p='train', images=train_imagedata)
+    valid_dataset = MyDataset(dirname=ver, p='valid', images=val_imagedata)
 
-    # train_imagevec, val_imagevec = get_imagevec()
+    # print(valid_dataset[0][0])
+    train_loader = DataLoader(train_dataset, batch_size=2048, shuffle=True)
+    valid_loader = DataLoader(valid_dataset, batch_size=2048, shuffle=True)
 
-    # train_dataset = MyDataset(train_imagevec, train_imagedata, train_keydata, train_ansdata, train_labeldata)
-    # valid_dataset = MyDataset(val_imagevec, val_imagedata, val_keydata, val_ansdata, val_labeldata)
-    train_dataset = MyDataset(dirname=ver, p='train', device=device)
-    valid_dataset = MyDataset(dirname=ver, p='valid', device=device)
 
-    train_loader = DataLoader(train_dataset, batch_size=128, shuffle=True)
-    valid_loader = DataLoader(valid_dataset, batch_size=128, shuffle=True)
 
-    return train_dataset, valid_dataset, train_loader, valid_loader
+    return train_loader, valid_loader
 
 # モデル評価
 def eval_net(model, data_loader, loss, device):
@@ -103,9 +86,18 @@ def train_net(model, train_loader, valid_loader, loss, n_iter, device):
             key = key.to(device)
             ans = ans.to(device)
             label = label.to(device)
+            # print(type(label))
             # model
             pred = model(image, key, ans)
-            output = loss(torch.squeeze(pred), label)
+            pred = torch.squeeze(pred)
+            # print(type(pred))
+            # print(type(label))
+            # print(pred.dtype)
+            # print(label.dtype)
+            # print(torch.squeeze(pred))
+            # print(torch.tensor(label,dtype=torch.float))
+            output = loss(pred, label)
+            # print(output)
 
             pred = torch.squeeze(pred)
             pred = pred.to('cpu').detach().numpy().copy()
@@ -158,7 +150,7 @@ def my_plot(train_losses, valid_losses):
     #グラフの凡例
     plt.legend()
     # グラフ画像保存
-    fig.savefig("result/lossimg/bert_{}_loss.png".format(ver))
+    fig.savefig("result/lossimag/{}_loss.png".format(ver))
 
 def select_epoch(valid_losses):
     min_loss = min(valid_losses)
@@ -167,8 +159,8 @@ def select_epoch(valid_losses):
 
 
 def main():
-    # valid_dataset, valid_loader = load_data()
-    train_dataset, valid_dataset, train_loader, valid_loader = load_data()
+    print("これは{}の疑似生成データを用いて訓練します".format(ver))
+    train_loader, valid_loader = load_data(device)
     loss = nn.BCEWithLogitsLoss()
     model = Model()
     print("データのロード完了")
