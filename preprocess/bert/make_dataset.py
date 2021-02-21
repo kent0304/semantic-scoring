@@ -6,9 +6,9 @@ from tqdm import tqdm
 
 
 def load_infovec():
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/train2017_bertinfovec.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/wn075/train2017_bertinfovec.pkl', 'rb') as f:
         train_infovec = pickle.load(f) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/val2017_bertinfovec.pkl', 'rb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/wn075/val2017_bertinfovec.pkl', 'rb') as f:
         val_infovec = pickle.load(f) 
     return train_infovec, val_infovec
 
@@ -65,13 +65,13 @@ def main():
     imagedata, keydata, ansdata, labeldata = make_dataset(train_imagevec, train_infovec)
     print("保存中...")
 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/imagedata.pkl', 'wb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/wn075/imagedata.pkl', 'wb') as f:
         pickle.dump(imagedata, f, protocol=4)
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/keydata.pkl', 'wb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/wn075/keydata.pkl', 'wb') as f:
         pickle.dump(keydata, f, protocol=4) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/ansdata.pkl', 'wb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/wn075/ansdata.pkl', 'wb') as f:
         pickle.dump(ansdata, f, protocol=4) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/labeldata.pkl', 'wb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/train_semantic_scoring/wn075/labeldata.pkl', 'wb') as f:
         pickle.dump(labeldata, f, protocol=4) 
     print("完了")
 
@@ -79,13 +79,13 @@ def main():
     imagedata, keydata, ansdata, labeldata = make_dataset(val_imagevec, val_infovec)
     print("保存中...")
 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/imagedata.pkl', 'wb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/wn075/imagedata.pkl', 'wb') as f:
         pickle.dump(imagedata, f, protocol=4)
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/keydata.pkl', 'wb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/wn075/keydata.pkl', 'wb') as f:
         pickle.dump(keydata, f, protocol=4) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/ansdata.pkl', 'wb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/wn075/ansdata.pkl', 'wb') as f:
         pickle.dump(ansdata, f, protocol=4) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/labeldata.pkl', 'wb') as f:
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/val_semantic_scoring/wn075/labeldata.pkl', 'wb') as f:
         pickle.dump(labeldata, f, protocol=4) 
     print("完了")
 
