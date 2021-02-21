@@ -48,6 +48,7 @@
 - women / woman
 - tourist / tourists
 - zebra / zebras
+- train / trains
 
 ## カンマ 2
 - green, white and black. / green, white, and black.
@@ -70,6 +71,10 @@
 - is hold / hold
 - lie / lying
 - lie / lying
+### 時制 1
+- is replaced / has replaced
+### コロケーション 1
+- is rest time / spends rest time
 
 ## スペル 16
 - Elefant / elephant
@@ -90,7 +95,7 @@
 - liying / lying
 
 
-##　前置詞 8
+##　前置詞 9
 - kiss to / kiss
 - arrives the land / arrives at the land
 - made in / is made of
@@ -101,13 +106,14 @@
 - landing on the airport. / landing at the airport.
 - such a / such as a
 - replace / be replaced with
-
-## 不適切な動詞 2
-- is rest time / spends rest time
 - enjoing / enjoying it 
 
-## 時制 1
-- is replaced / has replaced
+
+
+
+
+
+
 
 ## 固有名詞大文字 1
 - wii / Wii
@@ -119,19 +125,20 @@
 - tooth brashi / toothbrush
 
 # Based on image
-## 画像と一致しない名詞 8
+## 画像と一致しない名詞 10
 - snow boading / sking
 - woods / wasteland
 - danbo / elephant
 - aqua suits / wet suit
 - my friend / a man
 - a pet / pets
-- a guy / a boy
 - picker / receiver
+- Welcom skyland
+- Title hold
+- Bluckpet and whitepet
 
-## 画像と一致しない動詞 3
+## 画像と一致しない動詞 2
 - a bird sitting / a bird standing
-- is laughing / raise a clenched fist
 - The black animal will kill a man by kissing him.
 
 ## 余分な情報 2
@@ -141,19 +148,13 @@
 ## 解答者の意見 1
 - I like surf
 
-## 対象オブジェクトの数 3
+## 対象オブジェクトの数 1
 - two / three
-- He / Some people
-- trains / train
 
-## 文になっていない 画像内のオブジェクトを文の主語として表現できていない 6
-- Cake cut togther
-- Bluckpet and whitepet
-- Title hold
-- Welcom skyland
-- A girl holding a bat smile.
-- Many, many , many, displayed flustu 
 
+
+# key words を使えていない
+- 14
 ---
 
 # まとめ ----------------------------
@@ -181,6 +182,9 @@
 
 ## その他
 - 文になっていない 6
+
+
+
 
 
 
