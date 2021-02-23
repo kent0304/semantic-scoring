@@ -17,15 +17,17 @@ class MyDataset(Dataset):
         引数:
             dirnameは疑似生成手法のディレクトリ名
             pは train/valid 
+            images は画像のembedding 
         """
         # テキストファイルロード
         self.filename = os.path.join('/mnt/LSTA5/data/tanaka/lang-learn/coco/txtfile/', dirname, p, 'output.txt')
         self.df = pd.read_csv(self.filename, header=None, sep='\t')
         # SBERTロード
-        self.sbert_model = SentenceTransformer('distilbert-base-nli-stsb-mean-tokens')
+        # self.sbert_model = SentenceTransformer('distilbert-base-nli-stsb-mean-tokens')
+        self.sbert_model = SentenceTransformer('paraphrase-distilroberta-base-v1')
 
         # 語句
-        keyvec_path = '/mnt/LSTA5/data/tanaka/lang-learn/coco/txtfile/{}/{}/key_tensor.pkl'.format(dirname, p)
+        keyvec_path = '/mnt/LSTA5/data/tanaka/lang-learn/coco/txtfile/{}/{}/distilroberta_key_tensor.pkl'.format(dirname, p)
         if os.path.exists(keyvec_path):
             with open(keyvec_path, 'rb') as f:
                 self.keyvec = pickle.load(f)
@@ -38,7 +40,7 @@ class MyDataset(Dataset):
                 pickle.dump(self.keyvec, f, protocol=4)
 
         # 解答文
-        ansvec_path = '/mnt/LSTA5/data/tanaka/lang-learn/coco/txtfile/{}/{}/ans_tensor.pkl'.format(dirname, p)
+        ansvec_path = '/mnt/LSTA5/data/tanaka/lang-learn/coco/txtfile/{}/{}/distilroberta_ans_tensor.pkl'.format(dirname, p)
         if os.path.exists(ansvec_path):
             with open(ansvec_path, 'rb') as f:
                 self.ansvec = pickle.load(f)
