@@ -1,5 +1,6 @@
 import pickle
 import os
+import argparse
 import numpy as np
 import torch
 from torch import nn, optim
@@ -16,7 +17,9 @@ from sentence_transformers import SentenceTransformer
 
 
 device = torch.device('cuda:1')
-ver = os.getenv("PD")
+
+# ver = os.getenv("PD")
+ver = args.ver
 
 
 def load_data(device):
@@ -124,13 +127,13 @@ def train_net(model, train_loader, valid_loader, loss, n_iter, device):
         # 学習モデル保存
         if (epoch+1)%1==0:
             # 学習させたモデルの保存パス
-            model_path =  'model/bert/{}/model_epoch{}.pth'.format(ver, str(epoch+1))
+            model_path =  'model/bert/{}/0220model_epoch{}.pth'.format(ver, str(epoch+1))
             # モデル保存
             torch.save(model.to('cpu').state_dict(), model_path)
             # loss保存
-            with open('model/bert/{}/train_losses.pkl'.format(ver), 'wb') as f:
+            with open('model/bert/{}/0220train_losses.pkl'.format(ver), 'wb') as f:
                 pickle.dump(train_losses, f) 
-            with open('model/bert/{}/valid_losses.pkl'.format(ver), 'wb') as f:
+            with open('model/bert/{}/0220valid_losses.pkl'.format(ver), 'wb') as f:
                 pickle.dump(valid_losses, f) 
             # グラフ描画
             my_plot(train_losses, valid_losses)
@@ -150,7 +153,7 @@ def my_plot(train_losses, valid_losses):
     #グラフの凡例
     plt.legend()
     # グラフ画像保存
-    fig.savefig("result/lossimag/{}_loss.png".format(ver))
+    fig.savefig("result/lossimag/0220{}_loss.png".format(ver))
 
 def select_epoch(valid_losses):
     min_loss = min(valid_losses)
@@ -158,7 +161,8 @@ def select_epoch(valid_losses):
 
 
 
-def main():
+def main(args):
+    ver = args.ver
     print("これは{}の疑似生成データを用いて訓練します".format(ver))
     train_loader, valid_loader = load_data(device)
     loss = nn.BCEWithLogitsLoss()
@@ -178,4 +182,9 @@ def main():
     
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--ver',
+                        help='Select pseudo data version', required=True)
+    args = parser.parse_args()
+    main(args)
+
