@@ -19,10 +19,10 @@ from sentence_transformers import SentenceTransformer
 device = torch.device('cuda:1')
 
 # ver = os.getenv("PD")
-ver = args.ver
+# ver = args.ver
 
 
-def load_data(device):
+def load_data(device, ver):
     # 画像のキャッシュをロード
     with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/txtfile/imgs/train2017_images.pkl', 'rb') as f:
         train_imagedata = pickle.load(f) 
@@ -71,7 +71,7 @@ def eval_net(model, data_loader, loss, device):
     
 
 # モデルの学習
-def train_net(model, train_loader, valid_loader, loss, n_iter, device):
+def train_net(model, train_loader, valid_loader, loss, n_iter, device, ver):
     train_losses = []
     valid_losses = []
     train_accs = []
@@ -164,7 +164,7 @@ def select_epoch(valid_losses):
 def main(args):
     ver = args.ver
     print("これは{}の疑似生成データを用いて訓練します".format(ver))
-    train_loader, valid_loader = load_data(device)
+    train_loader, valid_loader = load_data(device, ver)
     loss = nn.BCEWithLogitsLoss()
     model = Model()
     print("データのロード完了")
@@ -175,7 +175,8 @@ def main(args):
                                            valid_loader=valid_loader,  
                                            loss=loss, 
                                            n_iter=100, 
-                                           device=device)
+                                           device=device,
+                                           ver=ver)
     best_epoch = select_epoch(valid_losses)
     print(f'{ver}の結果です')
     print(f'{best_epoch}epochのモデルが最もvalid lossが下がった。')
