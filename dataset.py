@@ -26,18 +26,18 @@ class MyDataset(Dataset):
         # self.sbert_model = SentenceTransformer('distilbert-base-nli-stsb-mean-tokens')
         self.sbert_model = SentenceTransformer('paraphrase-distilroberta-base-v1')
 
-        # 語句
-        keyvec_path = '/mnt/LSTA5/data/tanaka/lang-learn/coco/txtfile/{}/{}/distilroberta_key_tensor.pkl'.format(dirname, p)
-        if os.path.exists(keyvec_path):
-            with open(keyvec_path, 'rb') as f:
-                self.keyvec = pickle.load(f)
-        else:
-            self.keys = self.df.iloc[:,1]
-            self.keyvec = torch.zeros(len(self.keys), 768)
-            for i in tqdm(range(len(self.keys)), total=len(self.keys)):
-                self.keyvec[i] = torch.from_numpy(self.sbert_model.encode(self.df.iloc[i,1])).clone()
-            with open(keyvec_path, 'wb') as f:
-                pickle.dump(self.keyvec, f, protocol=4)
+        # # 語句
+        # keyvec_path = '/mnt/LSTA5/data/tanaka/lang-learn/coco/txtfile/{}/{}/distilroberta_key_tensor.pkl'.format(dirname, p)
+        # if os.path.exists(keyvec_path):
+        #     with open(keyvec_path, 'rb') as f:
+        #         self.keyvec = pickle.load(f)
+        # else:
+        #     self.keys = self.df.iloc[:,1]
+        #     self.keyvec = torch.zeros(len(self.keys), 768)
+        #     for i in tqdm(range(len(self.keys)), total=len(self.keys)):
+        #         self.keyvec[i] = torch.from_numpy(self.sbert_model.encode(self.df.iloc[i,1])).clone()
+        #     with open(keyvec_path, 'wb') as f:
+        #         pickle.dump(self.keyvec, f, protocol=4)
 
         # 解答文
         ansvec_path = '/mnt/LSTA5/data/tanaka/lang-learn/coco/txtfile/{}/{}/distilroberta_ans_tensor.pkl'.format(dirname, p)
@@ -71,14 +71,15 @@ class MyDataset(Dataset):
     def __getitem__(self, idx):  
         # 画像
         img = self.images[torch.tensor(self.imgidx[idx], dtype=torch.long)]
-        # 語句
-        key = self.keyvec[idx]
+        # # 語句
+        # key = self.keyvec[idx]
         # 解答文
         ans = self.ansvec[idx]
         # 正誤ラベル
         label = torch.tensor(self.labels[idx], dtype=torch.float) 
 
-        return img, key, ans, label
+        # return img, key, ans, label
+        return img, ans, label
 
 
 

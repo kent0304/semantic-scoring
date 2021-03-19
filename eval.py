@@ -1,16 +1,27 @@
-import pickle
-
+import csv
+import pickle 
+import yaml
+import argparse
 import numpy as np
 import torch
 from torch import nn, optim
 from torch.utils.data import DataLoader, Dataset
+import torch.nn.functional as F
 
 from tqdm import tqdm
 
+from gensim.models.wrappers import FastText
+import nltk
+nltk.download('punkt')
+
 from dataset import MyDataset
 from model import Model
+from PIL import Image
+from torchvision import transforms, models
 from matplotlib import pyplot as plt
 plt.switch_backend('agg')
+
+from sentence_transformers import SentenceTransformer
 
 from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score
 
@@ -20,45 +31,23 @@ from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_
 device = torch.device('cuda:1')
 
 
-def load_random_model():
-    # 学習済みモデル読み込み
-    model = Model()
-    model.load_state_dict(torch.load('model/random/model_epoch200.pth', map_location=device))
-    return model
-
-def load_bert_model():
-    # 学習済みモデル読み込み
-    model = Model()
-    model.load_state_dict(torch.load('model/bert/wn05/model_epoch7.pth', map_location=device))
-    return model
-
-def load_random_testdata():
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/random/train_semantic_scoring/imagedata.pkl', 'rb') as f:
+def load_data(device, ver):
+    # 画像のキャッシュをロード
+    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/txtfile/imgs/val2017_images.pkl', 'rb') as f:
         val_imagedata = pickle.load(f) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/random/train_semantic_scoring/keydata.pkl', 'rb') as f:
-        val_keydata = pickle.load(f) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/random/train_semantic_scoring/ansdata.pkl', 'rb') as f:
-        val_ansdata = pickle.load(f) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/random/train_semantic_scoring/labeldata.pkl', 'rb') as f:
-        val_labeldata = pickle.load(f) 
-    valid_dataset = MyDataset(val_imagedata, val_keydata, val_ansdata, val_labeldata)
-    valid_loader = DataLoader(valid_dataset, batch_size=128, shuffle=False)
+    print('val画像の数：', len(val_imagedata))
+
+    valid_dataset = MyDataset(dirname=ver, p='valid', images=val_imagedata)
+    valid_loader = DataLoader(valid_dataset, batch_size=128, shuffle=True)
+
     return valid_dataset, valid_loader
 
-def load_bert_testdata():
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/wn05/val_semantic_scoring/imagedata.pkl', 'rb') as f:
-        val_imagedata = pickle.load(f) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/wn05/val_semantic_scoring/keydata.pkl', 'rb') as f:
-        val_keydata = pickle.load(f) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/wn05/val_semantic_scoring/ansdata.pkl', 'rb') as f:
-        val_ansdata = pickle.load(f) 
-    with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/vector/bert/wn05/val_semantic_scoring/labeldata.pkl', 'rb') as f:
-        val_labeldata = pickle.load(f) 
-    valid_dataset = MyDataset(val_imagedata, val_keydata, val_ansdata, val_labeldata)
-    valid_loader = DataLoader(valid_dataset, batch_size=128, shuffle=False)
-    return valid_dataset, valid_loader
 
-    
+def load_model(ver):
+    # 学習済みモデル読み込み
+    model = Model()
+    model.load_state_dict(torch.load('model/bert/{}/0220model_epoch5.pth'.format(ver), map_location=device))
+    return model
 
 
 def eval(model, test_loader, device):
@@ -66,13 +55,12 @@ def eval(model, test_loader, device):
     model.eval()
     pred_list = []
     label_list = []
-    for i, (image, key, ans, label) in enumerate(tqdm(test_loader, total=len(test_loader))):
+    for i, (image, ans, label) in enumerate(tqdm(test_loader, total=len(test_loader))):
         with torch.no_grad():
             image = image.to(device)
-            key = key.to(device)
             ans = ans.to(device)
             label = label.to(device)
-            pred = model(image, key, ans)
+            pred = model(image, ans)
         
         pred = torch.squeeze(pred)
         
@@ -85,15 +73,38 @@ def eval(model, test_loader, device):
 
         pred_list += pred 
         label_list += label
-    return pred_list, label_list
+
+    new_pred_list = []
+    for e in pred_list:
+        if e == 0:
+            new_pred_list.append(1)
+        else:
+            new_pred_list.append(0)
+
+    new_label_list = []
+    for e in label_list:
+        if e == 0:
+            new_label_list.append(1)
+        else:
+            new_label_list.append(0)
+    return new_pred_list, new_label_list
 
 
 
 
 
 
-def main():
+def main(args):
     output = []
+
+    ver = args.ver
+    print("これは{}の疑似生成データを用いて訓練します".format(ver))
+    test_dataset, test_loader = load_data(device, ver)
+    model = load_model(ver)
+    print("データのロード完了")
+
+    pred_list, label_list = eval(model, test_loader, device)
+
     
     # # ランダム
     # test_dataset, test_loader = load_random_testdata()
@@ -112,11 +123,9 @@ def main():
 
     # output.append('\n')
     # bert
-    test_dataset, test_loader = load_bert_testdata()
-    model = load_bert_model()
+
     output.append('テストデータの数' + str(len(test_dataset)))
-    output.append('bertで疑似生成したデータで訓練したモデル')
-    pred_list, label_list = eval(model, test_loader,  device)
+
     cm = confusion_matrix(label_list, pred_list)
     print("cm:", cm)
     precision = precision_score(label_list, pred_list)
@@ -136,4 +145,8 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--ver',
+                        help='Select pseudo data version', required=True)
+    args = parser.parse_args()
+    main(args)
