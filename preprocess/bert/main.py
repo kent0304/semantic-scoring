@@ -51,41 +51,48 @@ def build_img2info(json_obj):
                         outputs = model(ids)
                     predictions = outputs.prediction_logits[0]
 
-                    _, predicted_indexes = torch.topk(predictions[i+1], k=20)
+                    _, predicted_indexes = torch.topk(predictions[i+1], k=5)
 
                     predicted_tokens = tokenizer.convert_ids_to_tokens(predicted_indexes.tolist())
                     # print('今回対象のトークン:', token[0])
                     # print('BERTで予測した置き換えられる語:', predicted_tokens)
                     for j, word in enumerate(predicted_tokens):
-                        if word != morph[i+1] and word != '[UNK]': # 置き換える語と同じでない
-                            try:
-                                w1 = wn.synset(token[0] + '.n.01')
-                            except nltk.corpus.reader.wordnet.WordNetError: # wordnetに存在しない場合
-                                # print('そもそもwordnetに存在しないので比較できない', token[0])
-                                # print(word, 'で決定')
-                                # final_noise_caption[i+1] = word
-                                noise_caption[i+1] = word
-                                break
-                            # 置換対象との類似度を比較
-                            try: 
-                                w2 = wn.synset(word + '.n.01')
-                                if w1.wup_similarity(w2) < 0.75: # 類似度0.5未満なら採用
-                                    # print(word, 'で決定')
-                                    # final_noise_caption[i+1] = word
-                                    # print("適用前")
-                                    # print(noise_caption)
-                                    noise_caption[i+1] = word
-                                    final_noise_caption = noise_caption[1:-1]
-                                    final_noise_caption = ' '.join(final_noise_caption)
-                                    noise_captions.append(final_noise_caption)
-                                    # print(noise_captions)
-                                    # print("適用後")
-                                    # print(noise_caption)
-                                    break
-                                else: # 類似度0.75以上なら次の候補へ
-                                    continue
-                            except nltk.corpus.reader.wordnet.WordNetError: 
-                                continue 
+                        if word != morph[i+1] and word != '[UNK]':
+                            noise_caption[i+1] = word
+                            final_noise_caption = noise_caption[1:-1]
+                            final_noise_caption = ' '.join(final_noise_caption)
+                            noise_captions.append(final_noise_caption)
+                            break
+
+                        # if word != morph[i+1] and word != '[UNK]': # 置き換える語と同じでない
+                        #     try:
+                        #         w1 = wn.synset(token[0] + '.n.01')
+                        #     except nltk.corpus.reader.wordnet.WordNetError: # wordnetに存在しない場合
+                        #         # print('そもそもwordnetに存在しないので比較できない', token[0])
+                        #         # print(word, 'で決定')
+                        #         # final_noise_caption[i+1] = word
+                        #         noise_caption[i+1] = word
+                        #         break
+                        #     # 置換対象との類似度を比較
+                        #     try: 
+                        #         w2 = wn.synset(word + '.n.01')
+                        #         if w1.wup_similarity(w2) < 1.1: # 類似度0.5未満なら採用
+                        #             # print(word, 'で決定')
+                        #             # final_noise_caption[i+1] = word
+                        #             # print("適用前")
+                        #             # print(noise_caption)
+                        #             noise_caption[i+1] = word
+                        #             final_noise_caption = noise_caption[1:-1]
+                        #             final_noise_caption = ' '.join(final_noise_caption)
+                        #             noise_captions.append(final_noise_caption)
+                        #             # print(noise_captions)
+                        #             # print("適用後")
+                        #             # print(noise_caption)
+                        #             break
+                        #         else: # 類似度0.75以上なら次の候補へ
+                        #             continue
+                        #     except nltk.corpus.reader.wordnet.WordNetError: 
+                        #         continue 
   
 
             # final_noise_caption = final_noise_caption[1:-1]   
@@ -96,7 +103,7 @@ def build_img2info(json_obj):
             # 名詞句をbert言語モデルで尤もらしい名詞句に変換
             new_noise.append(noise_captions)
         # 更新
-        dic['berteach_wn075_noise_captions'] = new_noise
+        dic['berteach_noise_captions'] = new_noise
 
         
     return json_obj
