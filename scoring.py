@@ -34,19 +34,28 @@ device = torch.device('cuda:1')
 def load_bert_wn025():
     # 学習済みモデル読み込み
     model = Model()
-    model.load_state_dict(torch.load('model/bert/wn025/model_epoch7.pth', map_location=device))
+   # model.load_state_dict(torch.load('model/bert/wn025/model_epoch7.pth', map_location=device))
+    # model.load_state_dict(torch.load('model/bert/berteach_wn025/model_epoch11.pth', map_location=device))
+    #model.load_state_dict(torch.load('model/bert/bert_wn025/0220model_epoch3.pth', map_location=device))
+    model.load_state_dict(torch.load('model/bert/berteach_wn025/0220model_epoch7.pth', map_location=device))
     return model
 
 def load_bert_wn05():
     # 学習済みモデル読み込み
     model = Model()
-    model.load_state_dict(torch.load('model/bert/wn05/model_epoch7.pth', map_location=device))
+   # model.load_state_dict(torch.load('model/bert/wn05/model_epoch7.pth', map_location=device))
+    # model.load_state_dict(torch.load('model/bert/berteach_wn05/model_epoch12.pth', map_location=device))
+    # model.load_state_dict(torch.load('model/bert/bert_wn05/0220model_epoch3.pth', map_location=device))
+    model.load_state_dict(torch.load('model/bert/berteach_wn05/0220model_epoch3.pth', map_location=device))
     return model
 
 def load_bert_wn075():
     # 学習済みモデル読み込み
     model = Model()
-    model.load_state_dict(torch.load('model/bert/wn075/model_epoch9.pth', map_location=device))
+    # model.load_state_dict(torch.load('model/bert/wn075/model_epoch9.pth', map_location=device))
+    # model.load_state_dict(torch.load('model/bert/berteach_wn075/0220model_epoch17.pth', map_location=device))
+    #model.load_state_dict(torch.load('model/bert/bert_wn075/0220model_epoch3.pth', map_location=device))
+    model.load_state_dict(torch.load('model/bert/berteach_wn075/0220model_epoch3.pth', map_location=device))
     return model
 
 
@@ -61,17 +70,18 @@ def embedding(obj):
     keyvec = torch.zeros(data_num, 768)
     ansvec = torch.zeros(data_num, 768)
     # text 
-    sbert_model = SentenceTransformer('distilbert-base-nli-stsb-mean-tokens')
+    # sbert_model = SentenceTransformer('distilbert-base-nli-stsb-mean-tokens')
+    sbert_model = SentenceTransformer('paraphrase-distilroberta-base-v1')
     for i, sample in enumerate(obj):
         # image
         image_paths.append(sample['IMAGE'])
         # text 
-        keyvec[i] = text2vec(sample['KEY'], sbert_model)
+        # keyvec[i] = text2vec(sample['KEY'], sbert_model)
         ansvec[i] = text2vec(sample['ANSWER'], sbert_model)
     # image
     imagevec = make_imagedata(image_paths, data_num)
 
-    return imagevec, keyvec, ansvec
+    return imagevec, ansvec
     
         
 def image2vec(image_net, image_paths):
@@ -114,14 +124,14 @@ def text2vec(text, sbert_model):
 
 
 
-def eval(model, imagevec, keyvec, ansvec):
+def eval(model, imagevec, ansvec):
     model = model.to(device)
     model.eval()
     with torch.no_grad():
         imagevec = imagevec.to(device)
-        keyvec = keyvec.to(device)
+        # keyvec = keyvec.to(device)
         ansvec = ansvec.to(device)
-        pred = model(imagevec, keyvec, ansvec)
+        pred = model(imagevec, ansvec)
 
     pred = torch.squeeze(pred)
     # print(pred)
@@ -142,12 +152,16 @@ def main():
     bert_wn075_model = load_bert_wn075()
 
     obj = load_data()
-    imagevec, keyvec, ansvec = embedding(obj)
+    imagevec, ansvec = embedding(obj)
     # 推論
     # random_result = eval(random_model, imagevec, keyvec, ansvec)
-    bert_wn025_score = eval(bert_wn025_model, imagevec, keyvec, ansvec)
-    bert_wn05_score = eval(bert_wn05model, imagevec, keyvec, ansvec)
-    bert_wn075_score = eval(bert_wn075_model, imagevec, keyvec, ansvec)
+    bert_wn025_score = eval(bert_wn025_model, imagevec,  ansvec)
+    bert_wn05_score = eval(bert_wn05model, imagevec, ansvec)
+    bert_wn075_score = eval(bert_wn075_model, imagevec,  ansvec)
+
+    # print(bert_wn025_score)
+    # print(bert_wn05_score)
+    print(bert_wn075_score)
 
     learners = ["A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "B1", "B2","B3", "B4", "B5", "B6", "B7", "B8"]
     questions = ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10"]
@@ -155,20 +169,34 @@ def main():
     result_wn025 = [questions]
     result_wn05 = [questions]
     result_wn075 = [questions]
+   
 
-    for i, learner in enumerate(learners):
-        result_wn025.append(bert_wn025_score[10*i:10*(i+1)])
-        result_wn05.append(bert_wn05_score[10*i:10*(i+1)])
-        result_wn075.append(bert_wn075_score[10*i:10*(i+1)])
+    A_bert_wn025_score = np.array(bert_wn025_score[:90]).reshape(10, 9).T.tolist()
+    B_bert_wn025_score = np.array(bert_wn025_score[90:]).reshape(10, 8).T.tolist()
+    A_bert_wn05_score = np.array(bert_wn05_score[:90]).reshape(10, 9).T.tolist()
+    B_bert_wn05_score = np.array(bert_wn05_score[90:]).reshape(10, 8).T.tolist()
+    A_bert_wn075_score = np.array(bert_wn075_score[:90]).reshape(10, 9).T.tolist()
+    B_bert_wn075_score = np.array(bert_wn075_score[90:]).reshape(10, 8).T.tolist()
 
 
-    with open("result/scoring/scoring_wn025.csv", "w") as f:
+        
+    result_wn025 += A_bert_wn025_score 
+    result_wn025 += B_bert_wn025_score
+    result_wn05 += A_bert_wn05_score
+    result_wn05 += B_bert_wn05_score
+    result_wn075 += A_bert_wn075_score
+    result_wn075 += B_bert_wn075_score
+
+   
+
+
+    with open("result/scoring/scoring_0220eachwn025.csv", "w") as f:
         writer = csv.writer(f)
         writer.writerows(result_wn025)
-    with open("result/scoring/scoring_wn05.csv", "w") as f:
+    with open("result/scoring/scoring_0220eachwn05.csv", "w") as f:
         writer = csv.writer(f)
         writer.writerows(result_wn05)
-    with open("result/scoring/scoring_wn075.csv", "w") as f:
+    with open("result/scoring/scoring_0220eachwn075.csv", "w") as f:
         writer = csv.writer(f)
         writer.writerows(result_wn075)
 

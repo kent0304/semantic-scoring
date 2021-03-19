@@ -76,7 +76,7 @@
 ### コロケーション 1
 - is rest time / spends rest time
 
-## スペル 16
+## スペル 17
 - Elefant / elephant
 - ehephant / elephant
 - bad / bat
@@ -93,6 +93,7 @@
 - raket / racket
 - laughind / laughing
 - liying / lying
+- The black animal will kill a man by kissing him.
 
 
 ##　前置詞 9
@@ -125,25 +126,24 @@
 - tooth brashi / toothbrush
 
 # Based on image
-## 画像と一致しない名詞 10
+## 画像と一致しない名詞 11
 - snow boading / sking
-- woods / wasteland
 - danbo / elephant
-- aqua suits / wet suit
+- headphone / receiver
 - my friend / a man
 - a pet / pets
 - picker / receiver
 - Welcom skyland
 - Title hold
 - Bluckpet and whitepet
-
-## 画像と一致しない動詞 2
-- a bird sitting / a bird standing
-- The black animal will kill a man by kissing him.
-
-## 余分な情報 2
-- 年齢
 - 目的語が不明（wears the write short）
+
+## 画像と一致しない動詞 1
+- a bird sitting / a bird standing
+
+
+## 余分な情報 1
+- 年齢
 
 ## 解答者の意見 1
 - I like surf
@@ -160,7 +160,7 @@
 # まとめ ----------------------------
 ## 軽微な文法誤り
 - 冠詞の誤り 22
-- スペル 16
+- スペル 17
 - カンマ 2
 - 不適切名詞 4
 - 固有名詞大文字 1
@@ -173,12 +173,12 @@
 - 不適切な動詞 2
 - 時制 1
 
-## 画像の内容 17
-- 画像と一致しない名詞 8
-- 画像と一致しない動詞 3
-- 余分な情報 2
+## 画像の内容 1
+- 画像と一致しない名詞 11
+- 画像と一致しない動詞 1
+- 余分な情報 1
 - 解答者の意見　1
-- 対象オブジェクトの数 3
+- 対象オブジェクトの数 1
 
 ## その他
 - 文になっていない 6

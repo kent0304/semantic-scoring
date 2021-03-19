@@ -1,4 +1,4 @@
-
+# テキストファイルから画像のembeddingをpickle保存するファイル
 import os
 import csv
 csv.field_size_limit(10000000000)

@@ -1,5 +1,6 @@
 import pickle
 import os
+import argparse
 import numpy as np
 import torch
 from torch import nn, optim
@@ -16,10 +17,12 @@ from sentence_transformers import SentenceTransformer
 
 
 device = torch.device('cuda:1')
-ver = os.getenv("PD")
+
+# ver = os.getenv("PD")
+# ver = args.ver
 
 
-def load_data(device):
+def load_data(device, ver):
     # 画像のキャッシュをロード
     with open('/mnt/LSTA5/data/tanaka/lang-learn/coco/txtfile/imgs/train2017_images.pkl', 'rb') as f:
         train_imagedata = pickle.load(f) 
@@ -45,14 +48,14 @@ def eval_net(model, data_loader, loss, device):
     model = model.to(device)
     outputs = []
     accs = []
-    for i, (image, key, ans, label) in enumerate(data_loader):
+    for i, (image, ans, label) in enumerate(data_loader):
         with torch.no_grad():
             # GPU setting
             image = image.to(device)
-            key = key.to(device)
+            # key = key.to(device)
             ans = ans.to(device)
             label = label.to(device)
-            pred = model(image, key, ans)
+            pred = model(image, ans)
     
         output = loss(torch.squeeze(pred), label)
         outputs.append(output.item())
@@ -68,7 +71,7 @@ def eval_net(model, data_loader, loss, device):
     
 
 # モデルの学習
-def train_net(model, train_loader, valid_loader, loss, n_iter, device):
+def train_net(model, train_loader, valid_loader, loss, n_iter, device, ver):
     train_losses = []
     valid_losses = []
     train_accs = []
@@ -80,15 +83,15 @@ def train_net(model, train_loader, valid_loader, loss, n_iter, device):
         # ネットワーク訓練モード
         model.train()
         accs = []
-        for i, (image, key, ans, label) in enumerate(tqdm(train_loader, total=len(train_loader))):        
+        for i, (image, ans, label) in enumerate(tqdm(train_loader, total=len(train_loader))):        
             # GPU setting
             image = image.to(device)
-            key = key.to(device)
+            # key = key.to(device)
             ans = ans.to(device)
             label = label.to(device)
             # print(type(label))
             # model
-            pred = model(image, key, ans)
+            pred = model(image, ans)
             pred = torch.squeeze(pred)
             # print(type(pred))
             # print(type(label))
@@ -124,19 +127,19 @@ def train_net(model, train_loader, valid_loader, loss, n_iter, device):
         # 学習モデル保存
         if (epoch+1)%1==0:
             # 学習させたモデルの保存パス
-            model_path =  'model/bert/{}/model_epoch{}.pth'.format(ver, str(epoch+1))
+            model_path =  'model/bert/{}/0220model_epoch{}.pth'.format(ver, str(epoch+1))
             # モデル保存
             torch.save(model.to('cpu').state_dict(), model_path)
             # loss保存
-            with open('model/bert/{}/train_losses.pkl'.format(ver), 'wb') as f:
+            with open('model/bert/{}/0220train_losses.pkl'.format(ver), 'wb') as f:
                 pickle.dump(train_losses, f) 
-            with open('model/bert/{}/valid_losses.pkl'.format(ver), 'wb') as f:
+            with open('model/bert/{}/0220valid_losses.pkl'.format(ver), 'wb') as f:
                 pickle.dump(valid_losses, f) 
             # グラフ描画
-            my_plot(train_losses, valid_losses)
+            my_plot(train_losses, valid_losses, ver)
     return train_losses, valid_losses
 
-def my_plot(train_losses, valid_losses):
+def my_plot(train_losses, valid_losses, ver):
     # グラフの描画先の準備
     fig = plt.figure()
     # 画像描画
@@ -150,7 +153,7 @@ def my_plot(train_losses, valid_losses):
     #グラフの凡例
     plt.legend()
     # グラフ画像保存
-    fig.savefig("result/lossimag/{}_loss.png".format(ver))
+    fig.savefig("result/lossimag/0220{}_loss.png".format(ver))
 
 def select_epoch(valid_losses):
     min_loss = min(valid_losses)
@@ -158,9 +161,10 @@ def select_epoch(valid_losses):
 
 
 
-def main():
+def main(args):
+    ver = args.ver
     print("これは{}の疑似生成データを用いて訓練します".format(ver))
-    train_loader, valid_loader = load_data(device)
+    train_loader, valid_loader = load_data(device, ver)
     loss = nn.BCEWithLogitsLoss()
     model = Model()
     print("データのロード完了")
@@ -171,11 +175,17 @@ def main():
                                            valid_loader=valid_loader,  
                                            loss=loss, 
                                            n_iter=100, 
-                                           device=device)
+                                           device=device,
+                                           ver=ver)
     best_epoch = select_epoch(valid_losses)
     print(f'{ver}の結果です')
     print(f'{best_epoch}epochのモデルが最もvalid lossが下がった。')
     
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--ver',
+                        help='Select pseudo data version', required=True)
+    args = parser.parse_args()
+    main(args)
+
