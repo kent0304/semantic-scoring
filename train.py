@@ -48,14 +48,14 @@ def eval_net(model, data_loader, loss, device):
     model = model.to(device)
     outputs = []
     accs = []
-    for i, (image, key, ans, label) in enumerate(data_loader):
+    for i, (image, ans, label) in enumerate(data_loader):
         with torch.no_grad():
             # GPU setting
             image = image.to(device)
-            key = key.to(device)
+            # key = key.to(device)
             ans = ans.to(device)
             label = label.to(device)
-            pred = model(image, key, ans)
+            pred = model(image, ans)
     
         output = loss(torch.squeeze(pred), label)
         outputs.append(output.item())
@@ -83,15 +83,15 @@ def train_net(model, train_loader, valid_loader, loss, n_iter, device, ver):
         # ネットワーク訓練モード
         model.train()
         accs = []
-        for i, (image, key, ans, label) in enumerate(tqdm(train_loader, total=len(train_loader))):        
+        for i, (image, ans, label) in enumerate(tqdm(train_loader, total=len(train_loader))):        
             # GPU setting
             image = image.to(device)
-            key = key.to(device)
+            # key = key.to(device)
             ans = ans.to(device)
             label = label.to(device)
             # print(type(label))
             # model
-            pred = model(image, key, ans)
+            pred = model(image, ans)
             pred = torch.squeeze(pred)
             # print(type(pred))
             # print(type(label))
@@ -136,10 +136,10 @@ def train_net(model, train_loader, valid_loader, loss, n_iter, device, ver):
             with open('model/bert/{}/0220valid_losses.pkl'.format(ver), 'wb') as f:
                 pickle.dump(valid_losses, f) 
             # グラフ描画
-            my_plot(train_losses, valid_losses)
+            my_plot(train_losses, valid_losses, ver)
     return train_losses, valid_losses
 
-def my_plot(train_losses, valid_losses):
+def my_plot(train_losses, valid_losses, ver):
     # グラフの描画先の準備
     fig = plt.figure()
     # 画像描画

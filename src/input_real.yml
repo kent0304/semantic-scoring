@@ -170,7 +170,7 @@
   KEY: 'display'
   ANSWER: "People come here to buy the colorful fruits which are displayed."
 - IMAGE: './src/GroupA/000000303566.jpg'
-  KEY: 'display'
+
   ANSWER: "A vegetable seller displays his apples arranged by color "
 - IMAGE: './src/GroupA/000000303566.jpg'
   KEY: 'display'
@@ -261,7 +261,7 @@
   ANSWER: "The boy who plays game is holding controller with his right hand."
 - IMAGE: './src/GroupA/000000575081.jpg'
   KEY: 'hold play'
-  ANSWER: "A young boy holds a controller in the hand to play a video game with movement functionality "
+  ANSWER: "A young boy holds a controller in the hand to play a video game with movement functionality."
 - IMAGE: './src/GroupA/000000575081.jpg'
   KEY: 'hold play'
   ANSWER: "The boy holding the remote controler is playing the game of Nintendo Wii Sport's bowling."

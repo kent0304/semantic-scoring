@@ -3,8 +3,8 @@ export PD_WN5E="berteach_wn05"
 export PD_WN75E="berteach_wn075"
 
 # 0
-# export PD=${PD_WN25E}
-# python train.py
+export PD=${PD_WN25E}
+python train.py
 
 # 1
 # export PD=${PD_WN5E}
@@ -15,5 +15,5 @@ export PD_WN75E="berteach_wn075"
 # python train.py
 
 # 3
-export PD="test"
-python train.py
+# export PD="test"
+# python train.py
