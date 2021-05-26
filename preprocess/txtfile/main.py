@@ -1,4 +1,5 @@
 # mscoco jsonからテキストファイル準備
+# txtfileは画像のid、語句、正しいキャプション文、正誤ラベル、画像のインデックスの順に文字列保存
 import json 
 import pickle
 import itertools
@@ -13,9 +14,9 @@ def each_write_txt(json_obj, ver):
     image_idx = -1
     pre_imageid = ''
     for image_set in tqdm(json_obj.items(), total=len(json_obj)):
-        # タプル要素1つ目
+        # タプル要素1つ目に画像のid
         imageid = image_set[0]
-        # タプル要素2つ目
+        # タプル要素2つ目に画像以外のメタ情報
         meta = image_set[1]
         for i, k in enumerate(meta['key']):
             # 語句が存在するかどうか

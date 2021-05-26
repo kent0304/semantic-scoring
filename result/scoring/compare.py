@@ -34,6 +34,11 @@ with open('scoring_0220eachwn075.csv') as f:
     reader = csv.reader(f)
     eachwn075 = [row for row in reader]
 
+# lxmert
+with open('pretrained_lxmert.csv') as f:
+    reader = csv.reader(f)
+    lxmert = [row for row in reader]
+
 def cal(human, target):
     human = list(itertools.chain.from_iterable(human[1:]))
     target = list(itertools.chain.from_iterable(target[1:]))
@@ -53,28 +58,41 @@ def cal(human, target):
         else:
             new_target.append(0)
     cm = confusion_matrix(new_human, new_target)
-    print(cm)
-    return precision_score(new_human, new_target)
+    # print(cm)
+    # print(new_human)
+    # print(new_target)
+    return precision_score(new_human, new_target), recall_score(new_human, new_target), f1_score(new_human, new_target)
 
 
 def main():
     # wn025_f1 = cal(human, wn025)
+    # print('wn025_f1', wn025_f1)
     # wn05_f1 = cal(human, wn05)
+    # print('wn05_f1', wn05_f1)
     # wn075_f1 = cal(human, wn075)
-    print(cal(human, random))
-    # eachwn025_f1 = cal(human, eachwn025)
-    # eachwn05_f1 = cal(human, eachwn05)
-    # eachwn075_f1 = cal(human, eachwn075)
+    # print('wn075_f1', wn075_f1)
+    random_p, random_r, random_f1 =  cal(human, random)
+    # print('ランダム', cal(human, random))
+    eachwn025_p, eachwn025_r, eachwn025_f1 = cal(human, eachwn025)
+    # print('eachwn025_f1', eachwn025_f1)
+    eachwn05_p, eachwn05_r, eachwn05_f1= cal(human, eachwn05)
+    # print('eachwn05_f1', eachwn05_f1)
+    eachwn075_p, eachwn075_r, eachwn075_f1= cal(human, eachwn075)
+    # print('eachwn075_f1', eachwn075_f1)
+    lxmert_p, lxmert_r, lxmert_f1= cal(human, lxmert)
+    # print('lxmert_f1', lxmert_f1)
 
-    # # result = 'wn025: ' + str(wn025_f1) + '\n'
-    # # result += 'wn05: ' + str(wn05_f1) + '\n'
-    # # result += 'wn075: ' + str(wn075_f1) + '\n'
-    # result = 'eachwn025: ' + str(eachwn025_f1) + '\n'
-    # result += 'eachwn05: ' + str(eachwn05_f1) + '\n'
-    # result += 'eachwn075: ' + str(eachwn075_f1) + '\n'
+    # result = 'wn025: ' + str(wn025_f1) + '\n'
+    # result += 'wn05: ' + str(wn05_f1) + '\n'
+    # result += 'wn075: ' + str(wn075_f1) + '\n'
+    result = 'ランダム: ' + str(random_p) +'\t' + str(random_r)+'\t' + str(random_f1) + '\n'
+    result += 'eachwn025: ' + str(eachwn025_p) +'\t' + str(eachwn025_r)+'\t' + str(eachwn025_f1) + '\n'
+    result += 'eachwn05: ' + str(eachwn05_p) +'\t' + str(eachwn05_r) +'\t'+ str(eachwn05_f1) + '\n'
+    result += 'eachwn075: ' + str(eachwn075_p) +'\t' + str(eachwn075_r)+'\t' + str(eachwn075_f1) + '\n'
+    result += 'lxmert_f1: ' + str(lxmert_p) +'\t' + str(lxmert_r)+'\t' + str(lxmert_f1) + '\n'
 
-    # with open('scoring_compared.txt', 'w') as f:
-    #     f.write(result)
+    with open('scoring_compared_new.txt', 'w') as f:
+        f.write(result)
 
     return 
 
